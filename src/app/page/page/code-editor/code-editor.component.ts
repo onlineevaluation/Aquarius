@@ -1,17 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/mode/markdown/markdown';
-import 'codemirror/mode/javascript/javascript';
-import {CodeProblem} from '../../../domain/CodeProblem';
-import {Answer} from '../../../domain/Answer';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CodeProblem } from '../../../domain/CodeProblem';
+import { Answer } from '../../../domain/Answer';
 
 @Component({
   selector: 'app-code-editor',
   templateUrl: './code-editor.component.html',
-  styleUrls: ['./code-editor.component.scss']
+  styleUrls: ['./code-editor.component.scss'],
 })
 export class CodeEditorComponent implements OnInit {
-
   @Input() problem: CodeProblem;
   @Output() public answered = new EventEmitter<Answer>();
   languages: Array<string> = ['java', 'c'];
@@ -19,15 +15,17 @@ export class CodeEditorComponent implements OnInit {
   public code: any;
   selectedLan = 'c';
   selectedTheme = 'vs';
-  public editorOptions:any;
+  public editorOptions: any;
 
-  constructor() {
-
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.code = '#include <stdio.h>\n\nint main() {\n  // write your code\n  return 0;\n} ';
-    this.editorOptions = {theme: this.selectedTheme, language: this.selectedLan};
+    this.code =
+      '#include <stdio.h>\n\nint main() {\n  // write your code\n  return 0;\n} ';
+    this.editorOptions = {
+      theme: this.selectedTheme,
+      language: this.selectedLan,
+    };
   }
   /**
    * 改变语言
@@ -35,11 +33,16 @@ export class CodeEditorComponent implements OnInit {
    */
   languageChange(language: string) {
     this.selectedLan = language;
-    this.editorOptions = {theme: this.selectedTheme, language: this.selectedLan};
+    this.editorOptions = {
+      theme: this.selectedTheme,
+      language: this.selectedLan,
+    };
     if (this.selectedLan === 'c') {
-      this.code = '#include <stdio.h>\n\nint main() {\n  // write your code\n  return 0;\n}  ';
+      this.code =
+        '#include <stdio.h>\n\nint main() {\n  // write your code\n  return 0;\n}  ';
     } else {
-      this.code = 'public class Example {\n  public staitc void main(String[] args) {\n  // wirte your code\n  }\n}\n ';
+      this.code =
+        'public class Example {\n  public staitc void main(String[] args) {\n  // wirte your code\n  }\n}\n ';
     }
   }
 
@@ -49,7 +52,10 @@ export class CodeEditorComponent implements OnInit {
    */
   themeChange(theme: string) {
     this.selectedTheme = theme;
-    this.editorOptions = {theme: this.selectedTheme, language: this.selectedLan};
+    this.editorOptions = {
+      theme: this.selectedTheme,
+      language: this.selectedLan,
+    };
   }
 
   /**
