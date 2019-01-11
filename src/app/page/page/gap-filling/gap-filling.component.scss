@@ -1,0 +1,14 @@
+.card {
+  margin-top: 20px;
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.input-text {
+  width: 200px;
+  color: rebeccapurple;
+}

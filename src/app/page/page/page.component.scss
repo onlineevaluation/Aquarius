@@ -1,0 +1,49 @@
+.data-row {
+  height: 20px;
+  min-height: 20px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.73);
+}
+
+.title-row {
+  height: 36px;
+}
+
+.problem-type {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.problem-content {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  flex-direction: column;
+
+  .divider {
+    margin-top: 30px;
+    width: 100%;
+  }
+}
+
+.problem-card {
+  width: 80%;
+  margin-bottom: 20px;
+
+  app-multiple-choice {
+    margin-top: 30px;
+  }
+
+  app-gap-filling {
+    margin-top: 30px;
+  }
+
+  .code-editor {
+    height: 300px;
+  }
+}
+

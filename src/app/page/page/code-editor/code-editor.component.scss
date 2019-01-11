@@ -1,0 +1,17 @@
+.problem-title {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  mat-chip {
+    margin-top: 15px;
+    height: 24px;
+    min-height: 24px;
+  }
+}
+
+
+.code-editor {
+  .editorContainer {
+    height: calc(100vh - 100px);
+  }
+}

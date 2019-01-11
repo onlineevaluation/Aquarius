@@ -1,0 +1,67 @@
+<!--试卷标题-->
+<mat-toolbar>
+  <mat-toolbar-row class="title-row">
+    <span class="fill-remaining-space "></span>
+    <span>数据结构链表测试</span>
+    <span class="fill-remaining-space "></span>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="data-row">
+    <span class="fill-remaining-space "></span>
+    <small>姓名:张三 &nbsp; 出卷人:李四 &nbsp; 考试时间:1月7日09点18分-1月7日11点18分</small>
+    <span class="fill-remaining-space "></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!--试题类型-->
+<div class="problem-type">
+  <!--todo 锚点设置 我也不知道什么时候可以解决 -->
+  <mat-chip-list>
+    <mat-chip>单选题</mat-chip>
+    <mat-chip>填空题</mat-chip>
+    <mat-chip color="primary">简答题</mat-chip>
+    <mat-chip color="accent">编程题</mat-chip>
+  </mat-chip-list>
+</div>
+
+<!--试卷答题区域-->
+<div class="problem-content">
+
+  <mat-divider class="divider"></mat-divider>
+  <h4 id="multiple-choice">单选题</h4>
+  <!--单选题-->
+  <div class="problem-card">
+    <app-multiple-choice *ngFor="let multipleChoice of MultipleChoices"
+                         [multipleChoice]="multipleChoice"
+                         (answered)="showMultipleAnswer($event)">
+    </app-multiple-choice>
+  </div>
+
+  <mat-divider class="divider"></mat-divider>
+  <h4>填空题</h4>
+  <div class="problem-card">
+    <app-gap-filling></app-gap-filling>
+  </div>
+  <mat-divider></mat-divider>
+  <div>简答题</div>
+  <mat-divider class="divider"></mat-divider>
+  <h4>代码题</h4>
+  <div class="problem-card ">
+
+    <app-code-editor class="code-editor" [problem]="problem" *ngFor="let problem of CodeProblems"
+                     (answered)="showCodeAnswer($event)"></app-code-editor>
+
+  </div>
+</div>
+
+
+<!--<div>-->
+<!--答题卡-->
+<!--选择题-->
+<!--<mat-grid-list cols=4 rowHeight="1:1">-->
+<!--<mat-grid-tile *ngFor="let multipleChoice of MultipleChoices; let i = index">{{i + 1}}-->
+
+<!--</mat-grid-tile>-->
+<!--</mat-grid-list>-->
+<!--</div>-->
+
