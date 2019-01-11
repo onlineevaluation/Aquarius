@@ -19,7 +19,7 @@ export class CodeEditorComponent implements OnInit {
   public code: any;
   selectedLan = 'c';
   selectedTheme = 'vs';
-  public editorOptions;
+  public editorOptions:any;
 
   constructor() {
 
@@ -29,7 +29,7 @@ export class CodeEditorComponent implements OnInit {
     this.code = '#include <stdio.h>\n\nint main() {\n  // write your code\n  return 0;\n} ';
     this.editorOptions = {theme: this.selectedTheme, language: this.selectedLan};
   }
-
+// 1/V1ixbJDC1fWUKGHDLz0quj9nsx8ovrJEOgre29hpdd4
   /**
    * 改变语言
    * @param language 选择的语言
