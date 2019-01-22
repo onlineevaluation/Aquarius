@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -14,8 +14,8 @@ import {
   MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,8 +36,10 @@ import {FormsModule} from '@angular/forms';
     MatRadioModule,
     MatGridListModule,
     MatSelectModule,
+    HttpClientModule,
   ],
   exports: [
+    HttpClientModule,
     FormsModule,
     CommonModule,
     MatToolbarModule,

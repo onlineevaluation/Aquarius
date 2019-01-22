@@ -1,0 +1,51 @@
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <!--登录卡片-->
+  <mat-card>
+    <mat-card-header> <mat-card-title>登录</mat-card-title> </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="full-width">
+        <input
+          required
+          matInput
+          type="text"
+          placeholder="学号"
+          [(ngModel)]="username"
+          name="username"
+        />
+        <mat-hint>必填项</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          type="password"
+          placeholder="密码"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <mat-hint>必填项</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button type="submit" color="primary" class="login-btn">
+        登录
+      </button>
+    </mat-card-content>
+
+    <mat-card-actions class="text-right">
+      <p>没有账号 <a href="">注册</a></p>
+      <p>忘记密码 <a href="">找回</a></p>
+    </mat-card-actions>
+
+    <mat-card-footer> </mat-card-footer>
+  </mat-card>
+
+  <!--展示卡片-->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title> 每日佳句 </mat-card-title>
+      <mat-card-subtitle> 少壮不努力，老大徒伤悲 </mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image src="/assets/img.jpg" alt="" height="300em" />
+    <mat-card-content> this is a smmssmsmms; </mat-card-content>
+  </mat-card>
+</form>
