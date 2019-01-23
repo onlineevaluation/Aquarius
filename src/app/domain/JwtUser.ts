@@ -3,4 +3,6 @@ export class JwtUser {
   exp: number;
   iat: number;
   sub: string;
+  userId: number;
+  classId: number;
 }

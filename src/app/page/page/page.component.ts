@@ -1,35 +1,60 @@
-import {Component, OnInit} from '@angular/core';
-import {MultipleChoice} from '../../domain/MultipleChoice';
-import {Answer} from '../../domain/Answer';
-import {CodeProblem} from '../../domain/CodeProblem';
+import { Component, OnInit } from '@angular/core';
+import { MultipleChoice } from '../../domain/MultipleChoice';
+import { Answer } from '../../domain/Answer';
+import { CodeProblem } from '../../domain/CodeProblem';
+import { authInfo } from 'src/app/utils/auth.util';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss']
+  styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
-
   public MultipleChoices: Array<MultipleChoice> = [
-    new MultipleChoice(1, '测试题目1', '这是答案A', '这是答案B', '这是答案C', '这是答案D'),
-    new MultipleChoice(2, '测试题目2', '这是答案A', '这是答案B', '这是答案C', '这是答案D'),
-    new MultipleChoice(3, '测试题目3', '这是答案A', '这是答案B', '这是答案C', '这是答案D'),
-    new MultipleChoice(4, '测试题目4', '这是答案A', '这是答案B', '这是答案C', '这是答案D')
+    new MultipleChoice(
+      1,
+      '测试题目1',
+      '这是答案A',
+      '这是答案B',
+      '这是答案C',
+      '这是答案D',
+    ),
+    new MultipleChoice(
+      2,
+      '测试题目2',
+      '这是答案A',
+      '这是答案B',
+      '这是答案C',
+      '这是答案D',
+    ),
+    new MultipleChoice(
+      3,
+      '测试题目3',
+      '这是答案A',
+      '这是答案B',
+      '这是答案C',
+      '这是答案D',
+    ),
+    new MultipleChoice(
+      4,
+      '测试题目4',
+      '这是答案A',
+      '这是答案B',
+      '这是答案C',
+      '这是答案D',
+    ),
   ];
 
   public CodeProblems: Array<CodeProblem> = [
-    new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms')
+    new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
   ];
-
 
   public answers: Array<Answer> = [];
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   /**
    * 获取单选题答案

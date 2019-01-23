@@ -8,12 +8,12 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class CanLoginGuard implements CanActivate, CanLoad {
   
-  constructor(private router:Router){}
+  constructor(private router:Router,private snackBar: MatSnackBar){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,15 +22,6 @@ export class CanLoginGuard implements CanActivate, CanLoad {
     return this.check();
   }
   canLoad(route: Route): boolean | Observable<boolean> | Promise<boolean> {
-    // this.check().subscribe(
-    //   next => {
-    //     if (!next) {
-    //       this.router.navigateByUrl('/')
-    //     }
-    //   },
-    //   error => console.log(`error is ${error}`),
-    // );
-    // console.log('b is ', b);
     return this.check();
   }
 
@@ -44,8 +35,9 @@ export class CanLoginGuard implements CanActivate, CanLoad {
         observer.complete();
         return;
       }
-      console.log('没有登录');
-
+      this.snackBar.open('没有登录，请先登录', '关闭', {
+        duration: 2000,
+      });
       observer.next(false);
       observer.complete();
       this.router.navigateByUrl("/login")

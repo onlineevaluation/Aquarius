@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../domain/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Result } from '../domain/Result';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtUser } from '../domain/JwtUser';
@@ -30,14 +30,18 @@ export class LoginService {
     return this.http.post<Result>(this.loginUrl, user, this.httpOptions).pipe(
       map(
         (result: Result) => {
+          console.log('result is ', result);
           const user = this.jwtHelpService.decodeToken(result.data.token);
-          console.log('user is ', user);
           const jwtUser = new JwtUser();
           jwtUser.auth = user.auth;
           jwtUser.exp = user.exp;
           jwtUser.iat = user.iat;
           jwtUser.sub = user.sub;
+          jwtUser.classId = user.classId;
+          jwtUser.userId = user.userId;
+          console.log('jwt user is ', jwtUser);
           // 将用户设置一下
+          localStorage.setItem('token', `Bearer ${result.data.token}`);
           return true;
         },
         error => {
