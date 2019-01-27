@@ -6,6 +6,7 @@ import { Result } from '../domain/Result';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Exam } from '../domain/Exam';
+
 @Injectable({
   providedIn: 'root',
 })

@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * 登录请求提交
+   */
   onSubmit() {
     const user = new User();
     user.username = this.username;

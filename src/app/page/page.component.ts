@@ -4,6 +4,7 @@ import { Answer } from '../domain/Answer';
 import { CodeProblem } from '../domain/CodeProblem';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageService } from './page.service';
+import { Problem } from '../domain/Problem';
 
 @Component({
   selector: 'app-page',
@@ -11,62 +12,31 @@ import { PageService } from './page.service';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
-  public MultipleChoices: Array<MultipleChoice> = [
-    new MultipleChoice(
-      1,
-      '测试题目1',
-      '这是答案A',
-      '这是答案B',
-      '这是答案C',
-      '这是答案D',
-    ),
-    new MultipleChoice(
-      2,
-      '测试题目2',
-      '这是答案A',
-      '这是答案B',
-      '这是答案C',
-      '这是答案D',
-    ),
-    new MultipleChoice(
-      3,
-      '测试题目3',
-      '这是答案A',
-      '这是答案B',
-      '这是答案C',
-      '这是答案D',
-    ),
-    new MultipleChoice(
-      4,
-      '测试题目4',
-      '这是答案A',
-      '这是答案B',
-      '这是答案C',
-      '这是答案D',
-    ),
-  ];
+  public multipleChoices: Array<Problem> = [];
 
   public CodeProblems: Array<CodeProblem> = [
     new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
   ];
 
-  public answers: Array<Answer> = [];
+  public blankProblems: Array<Problem>;
+
+  public answers: Array<Answer>=[];
   private pagesId: number;
   private classId: number;
   constructor(
     private router: ActivatedRoute,
     private pageService: PageService,
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.router.params.subscribe((params: Params) => {
       this.pagesId = params['pageId'];
       this.classId = params['classId'];
     });
-    console.log('page id is ', this.pagesId);
-    console.log('class id is ', this.classId);
-  }
-
-  ngOnInit() {
-    this.pageService.getProblem();
+    this.pageService.getProblem(this.classId, this.pagesId).subscribe(next => {
+      this.multipleChoices = next.data.signChoice;
+      this.blankProblems = next.data.blank;
+    });
   }
 
   /**

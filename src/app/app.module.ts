@@ -10,13 +10,19 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { CanLoginGuard } from './provide/CanLoginProvide';
 
 import * as Sentry from '@sentry/browser';
+import { authInfo } from './utils/auth.util';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
 
 Sentry.init({
-  dsn: 'https://a729f01798e147b0b53b91e82bbec843@sentry.io/1335604',
+  dsn: 'https://bdbd5652f73943adada0324c1dd9f8a0@sentry.io/1378315',
+  release: '1.0.0-dev',
+});
+
+Sentry.configureScope(scope => {
+  scope.setUser({ id: `${authInfo().userId}` });
 });
 
 @Injectable()
