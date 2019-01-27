@@ -1,24 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Exam} from '../../domain/Exam';
-import {MatSnackBar} from '@angular/material';
-import {Router} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Exam } from '../../domain/Exam';
+import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exam-item',
   templateUrl: './exam-item.component.html',
-  styleUrls: ['./exam-item.component.scss']
+  styleUrls: ['./exam-item.component.scss'],
 })
 export class ExamItemComponent implements OnInit {
-
   @Input() item: Exam;
   private num: number;
   private message: string;
 
-  constructor(public snackBar: MatSnackBar,
-              private router: Router) {
-  }
+  constructor(public snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
+    console.log('item is', this.item);
   }
 
   startExam() {
@@ -35,9 +33,10 @@ export class ExamItemComponent implements OnInit {
 
     // 计算吐司内容
     this.snackBar.open(this.message, '关闭', {
-      duration: 2000
+      duration: 2000,
     });
     // 路由转跳
-    this.router.navigate(['/page']);
+    console.log('item id is ', this.item.pagesId);
+    this.router.navigate(['/page', this.item.pagesId,this.item.classId]);
   }
 }

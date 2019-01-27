@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: './exam/exam.module#ExamModule',
     canLoad: [CanLoginGuard],
   },
-  { path: 'page', loadChildren: './page/page.module#PageModule' },
+  { path: 'page/:pageId/:classId', loadChildren: './page/page.module#PageModule' },
 
   // 404 页面
   { path: '**', loadChildren: './code404/code404.module#Code404Module' },

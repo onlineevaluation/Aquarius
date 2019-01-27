@@ -12,11 +12,11 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
+import { httpInterceptorProviders } from '../http-interceptors';
 
 @NgModule({
   declarations: [],
@@ -55,7 +55,7 @@ import { FormsModule } from '@angular/forms';
     MatRadioModule,
     MatGridListModule,
     MatSelectModule,
-  ]
+  ],
+ providers:[httpInterceptorProviders]
 })
-export class SharedModule {
-}
+export class SharedModule {}

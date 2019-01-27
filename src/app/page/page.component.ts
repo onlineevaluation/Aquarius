@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MultipleChoice } from '../../domain/MultipleChoice';
-import { Answer } from '../../domain/Answer';
-import { CodeProblem } from '../../domain/CodeProblem';
-import { authInfo } from 'src/app/utils/auth.util';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { MultipleChoice } from '../domain/MultipleChoice';
+import { Answer } from '../domain/Answer';
+import { CodeProblem } from '../domain/CodeProblem';
+import { ActivatedRoute, Params } from '@angular/router';
+import { PageService } from './page.service';
 
 @Component({
   selector: 'app-page',
@@ -51,10 +51,23 @@ export class PageComponent implements OnInit {
   ];
 
   public answers: Array<Answer> = [];
+  private pagesId: number;
+  private classId: number;
+  constructor(
+    private router: ActivatedRoute,
+    private pageService: PageService,
+  ) {
+    this.router.params.subscribe((params: Params) => {
+      this.pagesId = params['pageId'];
+      this.classId = params['classId'];
+    });
+    console.log('page id is ', this.pagesId);
+    console.log('class id is ', this.classId);
+  }
 
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.pageService.getProblem();
+  }
 
   /**
    * 获取单选题答案

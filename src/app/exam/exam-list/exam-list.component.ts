@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { authInfo } from 'src/app/utils/auth.util';
 import { ExamService } from '../exam.service';
+import { Exam } from 'src/app/domain/Exam';
 
 @Component({
   selector: 'app-exam-list',
@@ -8,34 +9,21 @@ import { ExamService } from '../exam.service';
   styleUrls: ['./exam-list.component.scss'],
 })
 export class ExamListComponent implements OnInit {
-  exams = [
-    {
-      name: '数据结构链表测试',
-      subtitle: '正在进行',
-      desc: '1月7日09点18分-1月7日11点18分',
-    },
-    {
-      name: '数据结构链表测试',
-      subtitle: '正在进行',
-      desc: '1月7日09点18分-1月7日11点18分',
-    },
-    {
-      name: '数据结构链表测试',
-      subtitle: '正在进行',
-      desc: '1月7日09点18分-1月7日11点18分',
-    },
-    {
-      name: '数据结构链表测试',
-      subtitle: '正在进行',
-      desc: '1月7日09点18分-1月7日11点18分',
-    },
-  ];
+  exams: Array<Exam>;
 
-  constructor(private examService:ExamService) {}
+  constructor(private examService: ExamService) {}
 
   ngOnInit() {
     const jwtUser = authInfo();
     console.log('jwt user is ', jwtUser);
-    // 获取 http 请求
+    this.examService.getExam().subscribe(
+      next => {
+        console.log('exams is ', next);
+        this.exams = next;
+      },
+      error => {
+        console.log('发生了错误', error);
+      },
+    );
   }
 }

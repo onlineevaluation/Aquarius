@@ -1,7 +1,11 @@
 export interface Exam {
   id: number;
-  name: string;
-  coverImg: string;
-  desc: string;
-  subtitle: string;
+  addTime: string;
+  classId: number;
+  commnet: string;
+  endTime: number;
+  invigilator: string;
+  pagesId: number;
+  startTime: string;
+  title: string;
 }
