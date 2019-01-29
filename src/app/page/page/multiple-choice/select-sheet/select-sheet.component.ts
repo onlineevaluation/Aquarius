@@ -1,10 +1,7 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
-import {
-  MAT_BOTTOM_SHEET_DATA,
-  MatRadioChange,
-} from '@angular/material';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA, MatRadioChange } from '@angular/material';
 import { MultipleChoiceService } from '../multiple-choice.service';
+import { StudentChoice } from 'src/app/domain/StudentChoice';
 
 @Component({
   selector: 'app-select-sheet',
@@ -12,18 +9,19 @@ import { MultipleChoiceService } from '../multiple-choice.service';
   styleUrls: ['./select-sheet.component.scss'],
 })
 export class SelectSheetComponent implements OnInit {
+  // a b c d 四个选项选中状态
   public check_A: boolean = false;
   public check_B: boolean = false;
   public check_C: boolean = false;
   public check_D: boolean = false;
 
-  @Output() public studentAnswer = new EventEmitter<Observable<any>>();
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private multipleService: MultipleChoiceService,
   ) {}
 
   ngOnInit() {
+    // 默认选中的选项
     switch (this.data.studentChoice.choiced) {
       case 'A':
         this.check_A = true;
@@ -40,7 +38,15 @@ export class SelectSheetComponent implements OnInit {
     }
   }
 
-  selectChoice(titleNumber: number, e: MatRadioChange) {
-    this.multipleService.setStudent(titleNumber, e.value);
+  /**
+   * 选择的试题
+   * @param e 选择选项
+   */
+  getChoice(e: MatRadioChange) {
+    const studentChoice = new StudentChoice();
+    studentChoice.choiced = e.value;
+    studentChoice.problemId = this.data.studentChoice.problemId;
+    studentChoice.titleNumber = this.data.studentChoice.titleNumber;
+    this.multipleService.setStudent(studentChoice);
   }
 }

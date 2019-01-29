@@ -1,13 +1,10 @@
 <div class="context">
   第{{ data.studentChoice.titleNumber }}题
-  <mat-radio-group
-    class="radio-group"
-    (change)="selectChoice(data.studentChoice.titleNumber, $event)"
-  >
+  <mat-radio-group class="radio-group" (change)="getChoice($event)">
     <mat-radio-button class="radio" value="A" [checked]="check_A">
       {{ data.choice[0] }}
     </mat-radio-button>
-    <mat-radio-button class="radio" value="B" [checked]=check_B>
+    <mat-radio-button class="radio" value="B" [checked]="check_B">
       {{ data.choice[1] }}
     </mat-radio-button>
     <mat-radio-button class="radio" value="C" [checked]="check_C">

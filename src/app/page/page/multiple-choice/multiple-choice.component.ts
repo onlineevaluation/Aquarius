@@ -13,10 +13,11 @@ import { StudentChoice } from 'src/app/domain/StudentChoice';
   styleUrls: ['./multiple-choice.component.scss'],
 })
 export class MultipleChoiceComponent implements OnInit {
+  // 试题
   @Input() multipleChoice: Problem;
+  // 题号
   @Input() index: number;
-  @Output() public answered = new EventEmitter<Answer>();
-  studentAnswer: string;
+
   constructor(
     private bottomSheet: MatBottomSheet,
     private multipleService: MultipleChoiceService,
@@ -24,32 +25,21 @@ export class MultipleChoiceComponent implements OnInit {
 
   ngOnInit() {}
 
-  getChoice(e: MatRadioChange, id: number) {
-    // console.log('e is ', e.value, id);
-    const ans = new Answer();
-    ans.id = id;
-    ans.answer = e.value;
-    this.answered.emit(ans);
-  }
-
   /**
    * 将题号和选择存起来
    * @param titleNumber 题号
    */
   openChoice(titleNumber: number) {
-    console.log('title number is ', titleNumber);
-
     let choiceList = this.multipleService.choiceList;
     var flag = choiceList.find(item => item.titleNumber === titleNumber);
-    console.log('student choice is ', flag);
     let studentChoice = new StudentChoice();
     if (flag === undefined) {
       studentChoice.titleNumber = titleNumber;
       studentChoice.choiced = '';
+      studentChoice.problemId = this.multipleChoice.id;
     } else {
       studentChoice = flag;
     }
-    console.log('student list is ', choiceList);
     this.bottomSheet.open(SelectSheetComponent, {
       data: {
         choice: [

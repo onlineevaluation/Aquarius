@@ -4,6 +4,7 @@ import { CodeProblem } from '../domain/CodeProblem';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PageService } from './page.service';
 import { Problem } from '../domain/Problem';
+import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 
 @Component({
   selector: 'app-page',
@@ -19,12 +20,13 @@ export class PageComponent implements OnInit {
 
   public blankProblems: Array<Problem>;
 
-  public answers: Array<Answer>=[];
+  public answers: Array<Answer> = [];
   private pagesId: number;
   private classId: number;
   constructor(
     private router: ActivatedRoute,
     private pageService: PageService,
+    private multipleService: MultipleChoiceService,
   ) {}
 
   ngOnInit() {
@@ -42,21 +44,23 @@ export class PageComponent implements OnInit {
    * 获取单选题答案
    * @param ans 单选题答案
    */
-  showMultipleAnswer(ans: Answer) {
-    if (this.answers.length === 0) {
-      this.answers.push(ans);
-    } else {
-      let flag = false;
-      for (let i = 0; i < this.answers.length; i++) {
-        if (ans.id === this.answers[i].id) {
-          this.answers.splice(i, 1, ans);
-          flag = true;
-        }
-      }
-      if (!flag) {
-        this.answers.push(ans);
-      }
-    }
+  showMultipleAnswer() {
+    let list = this.multipleService.choiceList;
+    console.log('list is ', list);
+    // if (this.answers.length === 0) {
+    //   this.answers.push(ans);
+    // } else {
+    //   let flag = false;
+    //   for (let i = 0; i < this.answers.length; i++) {
+    //     if (ans.id === this.answers[i].id) {
+    //       this.answers.splice(i, 1, ans);
+    //       flag = true;
+    //     }
+    //   }
+    //   if (!flag) {
+    //     this.answers.push(ans);
+    //   }
+    // }
   }
 
   showCodeAnswer(answer: Answer) {
