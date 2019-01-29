@@ -15,6 +15,9 @@ export const authInfo = () => {
     jwtUser.classId = user.classId;
     jwtUser.userId = user.userId;
     return jwtUser;
+  } else {
+    const jwtUser = new JwtUser();
+    jwtUser.userId = -1;
+    return jwtUser;
   }
-  return null;
 };

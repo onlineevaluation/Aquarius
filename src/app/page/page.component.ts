@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MultipleChoice } from '../domain/MultipleChoice';
 import { Answer } from '../domain/Answer';
 import { CodeProblem } from '../domain/CodeProblem';
 import { ActivatedRoute, Params } from '@angular/router';

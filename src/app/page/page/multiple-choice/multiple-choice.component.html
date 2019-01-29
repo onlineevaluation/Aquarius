@@ -1,24 +1,5 @@
-<mat-card class="card">
+<mat-card class="card" (click)="openChoice(index + 1)">
   <mat-card-content>
     {{ index + 1 }}. &nbsp; {{ multipleChoice.title }}
   </mat-card-content>
-  <mat-card-actions>
-    <mat-radio-group
-      class="radio-group"
-      (change)="getChoice($event, multipleChoice.id)"
-    >
-      <mat-radio-button class="radio-button" value="1">{{
-        multipleChoice.sectionA
-      }}</mat-radio-button>
-      <mat-radio-button value="2">{{
-        multipleChoice.sectionB
-      }}</mat-radio-button>
-      <mat-radio-button value="3">{{
-        multipleChoice.sectionC
-      }}</mat-radio-button>
-      <mat-radio-button value="4">{{
-        multipleChoice.sectionD
-      }}</mat-radio-button>
-    </mat-radio-group>
-  </mat-card-actions>
 </mat-card>

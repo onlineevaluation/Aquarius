@@ -1,12 +1,11 @@
-.card {
-    margin-top: 20px;
+.context {
+    margin: 10px;
     .radio-group {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        .radio {
+            margin-top: 20px;
+        }
     }
-}
-
-.card:hover {
-    box-shadow: 0 10px 5px #888888;
 }

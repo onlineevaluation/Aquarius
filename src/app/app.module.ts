@@ -11,6 +11,9 @@ import { CanLoginGuard } from './provide/CanLoginProvide';
 
 import * as Sentry from '@sentry/browser';
 import { authInfo } from './utils/auth.util';
+import { TestComponent } from './test/test.component';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { LayoutModule } from '@angular/cdk/layout';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -36,7 +39,7 @@ export class SentryErrorHandler implements ErrorHandler {
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TestComponent],
   imports: [
     JwtModule.forRoot({
       config: {
@@ -49,6 +52,12 @@ export class SentryErrorHandler implements ErrorHandler {
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    LayoutModule,
   ],
   providers: [
     CanLoginGuard,
