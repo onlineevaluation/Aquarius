@@ -8,7 +8,8 @@ export class MultipleChoiceService {
   /**
    * 保存选择题数据
    */
-  public choiceList: Array<StudentChoice> = [];
+  public choiceListLength: number = 0;
+  public choiceList: Array<StudentChoice> = new Array(this.choiceListLength);
 
   constructor() {}
 

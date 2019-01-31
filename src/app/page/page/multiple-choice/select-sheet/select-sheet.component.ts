@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_BOTTOM_SHEET_DATA, MatRadioChange } from '@angular/material';
+import { MAT_BOTTOM_SHEET_DATA, MatRadioChange, MatBottomSheetRef } from '@angular/material';
 import { MultipleChoiceService } from '../multiple-choice.service';
 import { StudentChoice } from 'src/app/domain/StudentChoice';
 
@@ -9,31 +9,43 @@ import { StudentChoice } from 'src/app/domain/StudentChoice';
   styleUrls: ['./select-sheet.component.scss'],
 })
 export class SelectSheetComponent implements OnInit {
-  // a b c d 四个选项选中状态
-  public check_A: boolean = false;
-  public check_B: boolean = false;
-  public check_C: boolean = false;
-  public check_D: boolean = false;
+  /**
+   * A 选项是否选中
+   */
+  public isCheck_A: boolean = false;
+   /**
+   * B 选项是否选中
+   */
+  public isCheck_B: boolean = false;
+  /**
+   * C 选项是否选中
+   */
+  public isCheck_C: boolean = false;
+  /**
+   * D 选项是否选中
+   */
+  public isCheck_D: boolean = false;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private multipleService: MultipleChoiceService,
+    private bottomSheetRef:MatBottomSheetRef<SelectSheetComponent>
   ) {}
 
   ngOnInit() {
     // 默认选中的选项
     switch (this.data.studentChoice.choiced) {
       case 'A':
-        this.check_A = true;
+        this.isCheck_A = true;
         break;
       case 'B':
-        this.check_B = true;
+        this.isCheck_B = true;
         break;
       case 'C':
-        this.check_C = true;
+        this.isCheck_C = true;
         break;
       case 'D':
-        this.check_D = true;
+        this.isCheck_D = true;
         break;
     }
   }
@@ -48,5 +60,6 @@ export class SelectSheetComponent implements OnInit {
     studentChoice.problemId = this.data.studentChoice.problemId;
     studentChoice.titleNumber = this.data.studentChoice.titleNumber;
     this.multipleService.setStudent(studentChoice);
+    this.bottomSheetRef.dismiss(studentChoice)
   }
 }

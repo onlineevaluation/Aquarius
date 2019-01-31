@@ -25,53 +25,91 @@
   </mat-chip-list>
 </div>
 
-<!--试卷答题区域-->
-<div class="problem-content">
-  <mat-divider class="divider"></mat-divider>
-  <h4 id="multiple-choice">单选题 &nbsp; (点击试题作答) </h4>
-  <!--单选题-->
-  <div class="problem-card">
-    <app-multiple-choice
-      *ngFor="let multipleChoice of multipleChoices; index as i"
-      [multipleChoice]="multipleChoice"
-      [index]="i"
-    >
-    </app-multiple-choice>
-  </div>
+<mat-divider class="divider"></mat-divider>
 
-  <mat-divider class="divider"></mat-divider>
-  <!-- 填空题 -->
-  <h4>填空题</h4>
-  <div class="problem-card">
-    <app-gap-filling
-      *ngFor="let blankProblem of blankProblems; index as i"
-      [blankProblem]="blankProblem"
-      [index]="i"
-    ></app-gap-filling>
+<div class="page-content">
+  <!--试卷答题区域-->
+  <div class="problem-content">
+    <h4 id="multiple-choice">单选题 &nbsp; (点击试题作答)</h4>
+    <!--单选题-->
+    <div class="problem-card">
+      <app-multiple-choice
+        *ngFor="let multipleChoice of multipleChoices; index as i"
+        [multipleChoice]="multipleChoice"
+        [index]="i"
+        (answered)="showMultipleAnswer($event)"
+      >
+      </app-multiple-choice>
+    </div>
+
+    <mat-divider class="divider"></mat-divider>
+    <!-- 填空题 -->
+    <h4>填空题 &nbsp; (点击试题作答)</h4>
+    <div class="problem-card">
+      <app-gap-filling
+        *ngFor="let blankProblem of blankProblems; index as i"
+        [blankProblem]="blankProblem"
+        [index]="i"
+      ></app-gap-filling>
+    </div>
+    <mat-divider></mat-divider>
+    <!-- 简答题 -->
+    <div><h4>简答题</h4></div>
+    <mat-divider class="divider"></mat-divider>
+    <!-- 代码题 -->
+    <h4>代码题</h4>
+    <div class="problem-card ">
+      <app-code-editor
+        class="code-editor"
+        [problem]="problem"
+        *ngFor="let problem of CodeProblems"
+        (answered)="showCodeAnswer($event)"
+      ></app-code-editor>
+    </div>
   </div>
-  <mat-divider></mat-divider>
-  <!-- 简答题 -->
-  <div><h4>简答题</h4></div>
-  <mat-divider class="divider"></mat-divider>
-  <!-- 代码题 -->
-  <h4>代码题</h4>
-  <div class="problem-card ">
-    <app-code-editor
-      class="code-editor"
-      [problem]="problem"
-      *ngFor="let problem of CodeProblems"
-      (answered)="showCodeAnswer($event)"
-    ></app-code-editor>
+  <!--答题卡-->
+  <div class="student-ans-card">
+    <!--选择题-->
+    <mat-card>
+      <mat-card-title>答题卡</mat-card-title>
+      <mat-card-subtitle> {{ msg }} </mat-card-subtitle>
+      <mat-card-content>
+        <div>
+          选择题
+          <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+            <mat-grid-tile
+              class="grid-tile"
+              *ngFor="let card of multipleChoicesCard; index as i"
+              [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+            >
+              {{ i + 1 }}
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+        <div>填空题</div>
+        <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+          <mat-grid-tile
+            class="grid-tile"
+            *ngFor="let card of multipleChoicesCard; index as i"
+            [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+          >
+            {{ i + 1 }}
+          </mat-grid-tile>
+        </mat-grid-list>
+        <div>简答题</div>
+        <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+          <mat-grid-tile
+            class="grid-tile"
+            *ngFor="let card of multipleChoicesCard; index as i"
+            [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+          >
+            {{ i + 1 }}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent">交卷</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
-
-<!--<div>-->
-<!--答题卡-->
-<!--选择题-->
-<!--<mat-grid-list cols=4 rowHeight="1:1">-->
-<!--<mat-grid-tile *ngFor="let multipleChoice of MultipleChoices; let i = index">{{i + 1}}-->
-
-<!--</mat-grid-tile>-->
-<!--</mat-grid-list>-->
-<!--</div>-->
-

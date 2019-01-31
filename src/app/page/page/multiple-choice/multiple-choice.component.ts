@@ -1,9 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatRadioChange, MatBottomSheet } from '@angular/material';
-import { Answer } from '../../../domain/Answer';
+import { MatBottomSheet } from '@angular/material';
 import { Problem } from 'src/app/domain/Problem';
 import { SelectSheetComponent } from './select-sheet/select-sheet.component';
-import { MultipleChoice } from 'src/app/domain/MultipleChoice';
 import { MultipleChoiceService } from './multiple-choice.service';
 import { StudentChoice } from 'src/app/domain/StudentChoice';
 
@@ -13,11 +11,16 @@ import { StudentChoice } from 'src/app/domain/StudentChoice';
   styleUrls: ['./multiple-choice.component.scss'],
 })
 export class MultipleChoiceComponent implements OnInit {
-  // 试题
+  /**
+   * 传入的多选题
+   */
   @Input() multipleChoice: Problem;
-  // 题号
+  /**
+   * 传入的题号
+   */
   @Input() index: number;
-
+  @Output() public answered = new EventEmitter<any>();
+  public cardList;
   constructor(
     private bottomSheet: MatBottomSheet,
     private multipleService: MultipleChoiceService,
@@ -40,7 +43,8 @@ export class MultipleChoiceComponent implements OnInit {
     } else {
       studentChoice = flag;
     }
-    this.bottomSheet.open(SelectSheetComponent, {
+    // 下面非常有用 上面垃圾但是还不能删除，有时间重构
+    let resultRef = this.bottomSheet.open(SelectSheetComponent, {
       data: {
         choice: [
           this.multipleChoice.sectionA,
@@ -50,6 +54,13 @@ export class MultipleChoiceComponent implements OnInit {
         ],
         studentChoice: studentChoice,
       },
+    });
+    let studentResult = new StudentChoice();
+    studentResult.titleNumber = -1;
+    studentResult.choiced = '';
+    resultRef.afterDismissed().subscribe(next => {
+      studentResult = next;
+      this.answered.emit(studentResult);
     });
   }
 }
