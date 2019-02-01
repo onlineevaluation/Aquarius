@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Answer } from '../domain/Answer';
 import { CodeProblem } from '../domain/CodeProblem';
-import { ActivatedRoute, Params } from '@angular/router';
-import { PageService } from './page.service';
 import { Problem } from '../domain/Problem';
-import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 import { StudentAns } from '../domain/StudentAns';
+import { PageService } from './page.service';
+import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 
 @Component({
   selector: 'app-page',
@@ -21,6 +21,11 @@ export class PageComponent implements OnInit {
    * 选择题答题卡数据
    */
   public multipleChoicesCard: Array<StudentAns> = [];
+
+  /**
+   * 填空题答题卡数据
+   */
+  public gapFillingCard: Array<StudentAns> = [];
 
   public CodeProblems: Array<CodeProblem> = [
     new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
@@ -82,16 +87,22 @@ export class PageComponent implements OnInit {
    *
    * @param answer 获取代码题答案
    */
-  showCodeAnswer(answer: Answer) {
-    
-   }
+  showCodeAnswer(answer: Answer) {}
 
   /**
    * 获取填空题答案
    * @param studentAns 填空题答案
    */
-  showGapFillingAnswer(studentAns: StudentAns) {
-    console.log('填空题是', studentAns);
+  showGapFillingAnswer(ans: StudentAns) {
+    console.log('填空题是', ans);
+    if (ans !== undefined) {
+      for (let i = 0; i < this.gapFillingCard.length; i++) {
+        if (ans.titleNumber === this.gapFillingCard[i].titleNumber) {
+          this.gapFillingCard.splice(i, 1, ans);
+        }
+      }
+    }
+    console.log('填空题答题卡', this.gapFillingCard);
   }
 
   /**

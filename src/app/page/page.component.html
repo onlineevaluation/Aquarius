@@ -87,15 +87,17 @@
             </mat-grid-tile>
           </mat-grid-list>
         </div>
-        <div>填空题</div>
-        <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
-          <mat-grid-tile
-            class="grid-tile"
-            *ngFor="let card of multipleChoicesCard; index as i"
-            [style.background-color]="card.choiced === '' ? 'red' : 'green'"
-          >
-            {{ i + 1 }}
-          </mat-grid-tile>
+        <div>填空题
+          <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+            <mat-grid-tile
+              class="grid-tile"
+              *ngFor="let card of gapFillingCard; index as i"
+              [style.background-color]="card.ans === '' ? 'red' : 'green'"
+            >
+              {{ i + 1 }}
+            </mat-grid-tile>
+        </div>
+    
         </mat-grid-list>
         <div>简答题</div>
         <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
