@@ -66,6 +66,8 @@ export class PageComponent implements OnInit {
         this.multipleChoicesCard[i] = studentChoice;
       }
     });
+    
+
     this.resetTime(this.time);
   }
 
