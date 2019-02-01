@@ -50,6 +50,7 @@
         *ngFor="let blankProblem of blankProblems; index as i"
         [blankProblem]="blankProblem"
         [index]="i"
+        (blankAns)="showGapFillingAnswer($event)"
       ></app-gap-filling>
     </div>
     <mat-divider></mat-divider>
@@ -80,7 +81,7 @@
             <mat-grid-tile
               class="grid-tile"
               *ngFor="let card of multipleChoicesCard; index as i"
-              [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+              [style.background-color]="card.ans === '' ? 'red' : 'green'"
             >
               {{ i + 1 }}
             </mat-grid-tile>
@@ -91,7 +92,7 @@
           <mat-grid-tile
             class="grid-tile"
             *ngFor="let card of multipleChoicesCard; index as i"
-            [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+            [style.background-color]="card.choiced === '' ? 'red' : 'green'"
           >
             {{ i + 1 }}
           </mat-grid-tile>
@@ -101,7 +102,7 @@
           <mat-grid-tile
             class="grid-tile"
             *ngFor="let card of multipleChoicesCard; index as i"
-            [style.background-color]="card.choiced !== '' ? 'red' : 'green'"
+            [style.background-color]="card.choiced === '' ? 'red' : 'green'"
           >
             {{ i + 1 }}
           </mat-grid-tile>

@@ -5,8 +5,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { PageService } from './page.service';
 import { Problem } from '../domain/Problem';
 import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
-import { StudentChoice } from '../domain/StudentChoice';
-
+import { StudentAns } from '../domain/StudentAns';
 
 @Component({
   selector: 'app-page',
@@ -21,12 +20,12 @@ export class PageComponent implements OnInit {
   /**
    * 选择题答题卡数据
    */
-  public multipleChoicesCard: Array<StudentChoice> = [];
+  public multipleChoicesCard: Array<StudentAns> = [];
 
   public CodeProblems: Array<CodeProblem> = [
     new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
   ];
-  public msg: string="时分秒";
+  public msg: string = '时分秒';
   private time = 3600000;
   /**
    * 计时器
@@ -55,23 +54,20 @@ export class PageComponent implements OnInit {
       this.blankProblems = next.data.blank;
       this.multipleChoicesCard.length = this.multipleChoices.length;
       for (let i = 0; i < this.multipleChoicesCard.length; i++) {
-        const studentChoice = new StudentChoice();
+        const studentChoice = new StudentAns();
         // 题号是从1题开始的
         studentChoice.titleNumber = i + 1;
-        studentChoice.choiced = '';
+        studentChoice.ans = '';
         this.multipleChoicesCard[i] = studentChoice;
       }
     });
     this.resetTime(this.time);
-    console.log('init ', this.multipleChoicesCard);
   }
 
   /**
    * 获取单选题答案
    */
-  showMultipleAnswer(ans: StudentChoice) {
-    // console.log('card list', this.multipleChoicesCard);
-    console.log('ans is ', ans);
+  showMultipleAnswer(ans: StudentAns) {
     if (ans !== undefined) {
       for (let i = 0; i < this.multipleChoicesCard.length; i++) {
         if (ans.titleNumber === this.multipleChoicesCard[i].titleNumber) {
@@ -79,7 +75,7 @@ export class PageComponent implements OnInit {
         }
       }
     }
-    console.log('this card is ', this.multipleChoicesCard);
+    console.log('card is ', this.multipleChoicesCard);
   }
 
   /**
@@ -87,7 +83,15 @@ export class PageComponent implements OnInit {
    * @param answer 获取代码题答案
    */
   showCodeAnswer(answer: Answer) {
-    console.log('code ans is ', answer);
+    
+   }
+
+  /**
+   * 获取填空题答案
+   * @param studentAns 填空题答案
+   */
+  showGapFillingAnswer(studentAns: StudentAns) {
+    console.log('填空题是', studentAns);
   }
 
   /**
@@ -103,11 +107,8 @@ export class PageComponent implements OnInit {
         setTimeout(countdown, 1000);
       } else {
         // 交卷
-        
       }
-      console.log('time is ', that.msg);
     }
-
     countdown();
   }
 }

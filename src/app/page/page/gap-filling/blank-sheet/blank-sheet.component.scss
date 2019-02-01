@@ -1,0 +1,10 @@
+.context {
+    margin: 10px;
+    .blank-field {
+        display: flex;
+        flex-direction: column;
+        .input-ans {
+            font-size: 16px;
+        }
+    }
+}

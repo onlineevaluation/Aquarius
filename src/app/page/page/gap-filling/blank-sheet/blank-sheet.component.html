@@ -1,0 +1,15 @@
+<div class="context">
+  第i题
+  <mat-form-field
+    *ngFor="let item of studentAnsArray; index as i"
+    class="blank-field"
+  >
+    <span matPrefix> 第{{ i + 1 }}空 &nbsp; </span
+    ><input
+      matInput
+      placeholder="填写答案"
+      class="input-ans"
+      [(ngModel)]="ans[i]"
+    />
+  </mat-form-field>
+</div>

@@ -3,7 +3,7 @@ import { MatBottomSheet } from '@angular/material';
 import { Problem } from 'src/app/domain/Problem';
 import { SelectSheetComponent } from './select-sheet/select-sheet.component';
 import { MultipleChoiceService } from './multiple-choice.service';
-import { StudentChoice } from 'src/app/domain/StudentChoice';
+import { StudentAns } from 'src/app/domain/StudentAns';
 
 @Component({
   selector: 'app-multiple-choice',
@@ -35,10 +35,10 @@ export class MultipleChoiceComponent implements OnInit {
   openChoice(titleNumber: number) {
     let choiceList = this.multipleService.choiceList;
     var flag = choiceList.find(item => item.titleNumber === titleNumber);
-    let studentChoice = new StudentChoice();
+    let studentChoice = new StudentAns();
     if (flag === undefined) {
       studentChoice.titleNumber = titleNumber;
-      studentChoice.choiced = '';
+      studentChoice.ans = '';
       studentChoice.problemId = this.multipleChoice.id;
     } else {
       studentChoice = flag;
@@ -55,9 +55,9 @@ export class MultipleChoiceComponent implements OnInit {
         studentChoice: studentChoice,
       },
     });
-    let studentResult = new StudentChoice();
+    let studentResult = new StudentAns();
     studentResult.titleNumber = -1;
-    studentResult.choiced = '';
+    studentResult.ans = '';
     resultRef.afterDismissed().subscribe(next => {
       studentResult = next;
       this.answered.emit(studentResult);

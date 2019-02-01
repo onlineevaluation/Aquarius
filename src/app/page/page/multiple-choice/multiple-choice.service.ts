@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { StudentChoice } from 'src/app/domain/StudentChoice';
+import { StudentAns } from 'src/app/domain/StudentAns';
 /**
  * 选择题数据存储
  */
@@ -9,7 +9,7 @@ export class MultipleChoiceService {
    * 保存选择题数据
    */
   public choiceListLength: number = 0;
-  public choiceList: Array<StudentChoice> = new Array(this.choiceListLength);
+  public choiceList: Array<StudentAns> = new Array(this.choiceListLength);
 
   constructor() {}
 
@@ -17,9 +17,9 @@ export class MultipleChoiceService {
    * 保存学生选择答案
    * @param studentChoiceParam 学生选择答案
    */
-  setStudent(studentChoiceParam: StudentChoice) {
-    const studentChoice = new StudentChoice();
-    studentChoice.choiced = studentChoiceParam.choiced;
+  setStudent(studentChoiceParam: StudentAns) {
+    const studentChoice = new StudentAns();
+    studentChoice.ans = studentChoiceParam.ans;
     studentChoice.titleNumber = studentChoiceParam.titleNumber;
     studentChoice.problemId = studentChoiceParam.problemId;
     if (this.choiceList.length === 0) {
@@ -36,5 +36,6 @@ export class MultipleChoiceService {
         this.choiceList.push(studentChoice);
       }
     }
+    console.log("choice is ",this.choiceList)
   }
 }
