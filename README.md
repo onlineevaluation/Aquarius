@@ -8,16 +8,16 @@
 
 # Aquarius 水瓶座 ♒
 
-# 🏗 框架
+## 🏗 框架
 
 Angular 7
 
-# ⛩ UI
+## ⛩ UI
 
 Angular Material Design 7
 
-# 📝第三方库
+## 📝第三方库
 
 - angular-jwt
 
-# 功能
+## 功能
