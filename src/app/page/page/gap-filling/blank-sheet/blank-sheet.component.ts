@@ -18,8 +18,7 @@ export class BlankSheetComponent implements OnInit, OnDestroy {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
     private bottomSheetRef: MatBottomSheetRef<BlankSheetComponent>,
     private gapFillingService: GapFillingService,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     let anses = this.data.studentAns.ans.split('】【');
@@ -36,7 +35,11 @@ export class BlankSheetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.data.studentAns.ans = `【${this.ans.join('】【')}】`;
+    if (this.data.studentAns.ans != '') {
+      this.data.studentAns.ans = `【${this.ans.join('】【')}】`;
+    } else {
+      this.data.studentAns.ans = '';
+    }
     this.gapFillingService.setList(this.data.studentAns);
     this.bottomSheetRef.dismiss(this.data.studentAns);
   }

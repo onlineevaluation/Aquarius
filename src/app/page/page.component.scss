@@ -55,5 +55,38 @@
 }
 
 .grid-list {
+    color: white;
     width: 120px;
+}
+
+.tips {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+    .done {
+        margin: 10px;
+        background-color: #64dd17;
+        width: 25px;
+        height: 25px;
+        color: white;
+        font-size: 10px;
+        text-align: center;
+        line-height: 25px;
+    }
+    .doing {
+        margin: 10px;
+        background-color: #d32f2f;
+        width: 25px;
+        height: 25px;
+        color: white;
+        font-size: 10px;
+        text-align: center;
+        line-height: 25px;
+    }
+}
+
+.card-action {
+    display: flex;
+    justify-content: center;
 }

@@ -28,9 +28,7 @@ export class CanLoginGuard implements CanActivate, CanLoad {
   check(): Observable<boolean> {
     return new Observable(observer => {
       const token = localStorage.getItem('token');
-      console.log(`token is ${token}`);
       if (token != null) {
-        console.log('已经登录');
         observer.next(true);
         observer.complete();
         return;

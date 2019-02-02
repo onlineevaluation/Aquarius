@@ -12,6 +12,10 @@ import { SelectSheetComponent } from './page/multiple-choice/select-sheet/select
 import { MatBottomSheetModule } from '@angular/material';
 import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 import { BlankSheetComponent } from './page/gap-filling/blank-sheet/blank-sheet.component';
+import { QuestionAnswerComponent } from './page/question-answer/question-answer.component';
+import { GapFillingService } from './page/gap-filling/gap-filling.service';
+import { QuestionSheetComponent } from './page/question-answer/question-sheet/question-sheet.component';
+import { QuestionAnswerService } from './page/question-answer/question-answer.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,8 @@ import { BlankSheetComponent } from './page/gap-filling/blank-sheet/blank-sheet.
     CodeEditorComponent,
     SelectSheetComponent,
     BlankSheetComponent,
+    QuestionAnswerComponent,
+    QuestionSheetComponent,
   ],
   imports: [
     SharedModule,
@@ -28,7 +34,16 @@ import { BlankSheetComponent } from './page/gap-filling/blank-sheet/blank-sheet.
     PageRoutingModule,
     MonacoEditorModule.forRoot(),
   ],
-  providers: [PageService, MultipleChoiceService],
-  entryComponents: [SelectSheetComponent, BlankSheetComponent],
+  providers: [
+    PageService,
+    MultipleChoiceService,
+    GapFillingService,
+    QuestionAnswerService,
+  ],
+  entryComponents: [
+    SelectSheetComponent,
+    BlankSheetComponent,
+    QuestionSheetComponent,
+  ],
 })
 export class PageModule {}

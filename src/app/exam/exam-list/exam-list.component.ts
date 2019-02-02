@@ -15,10 +15,8 @@ export class ExamListComponent implements OnInit {
 
   ngOnInit() {
     const jwtUser = authInfo();
-    console.log('jwt user is ', jwtUser);
     this.examService.getExam().subscribe(
       next => {
-        console.log('exams is ', next);
         this.exams = next;
       },
       error => {

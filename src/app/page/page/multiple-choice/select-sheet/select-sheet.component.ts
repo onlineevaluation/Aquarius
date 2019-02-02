@@ -38,8 +38,6 @@ export class SelectSheetComponent implements OnInit {
 
   ngOnInit() {
     // 默认选中的选项
-    console.log('choice is ', this.data.studentChoice.ans);
-
     switch (this.data.studentChoice.ans) {
       case 'A':
         this.isCheck_A = true;

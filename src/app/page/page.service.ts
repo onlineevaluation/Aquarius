@@ -15,7 +15,6 @@ export class PageService {
 
     return this.http.get<Result>(`/page/exam`, { params }).pipe(
       map((result: Result) => {
-        console.log('result is ', result);
         return result;
       }),
     );

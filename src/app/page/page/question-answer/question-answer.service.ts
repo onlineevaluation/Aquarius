@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { StudentAns } from 'src/app/domain/StudentAns';
 
 @Injectable()
-export class GapFillingService {
+export class QuestionAnswerService {
   private studentAnsList: Array<StudentAns> = [];
-
   constructor() {}
 
   setList(studentAns: StudentAns) {

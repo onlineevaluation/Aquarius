@@ -1,8 +1,9 @@
 <div class="context">
-  第i题
+  填空:第{{ data.studentAns.titleNumber }}题
   <mat-form-field
     *ngFor="let item of studentAnsArray; index as i"
     class="blank-field"
+    color="accent"
   >
     <span matPrefix> 第{{ i + 1 }}空 &nbsp; </span
     ><input

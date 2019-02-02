@@ -1,0 +1,15 @@
+<div class="context">
+  简答:第{{ data.studentAns.titleNumber }}题
+  <mat-form-field appearance="outline" class="student-ans" color="accent">
+    <mat-label>答题卡</mat-label>
+    <textarea
+    [(ngModel)]="ans"
+      matInput
+      placeholder="填写答案"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="6"
+    ></textarea>
+  </mat-form-field>
+</div>

@@ -3,7 +3,7 @@ export interface Exam {
   addTime: string;
   classId: number;
   commnet: string;
-  endTime: number;
+  endTime: string;
   invigilator: string;
   pagesId: number;
   startTime: string;

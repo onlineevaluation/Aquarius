@@ -12,17 +12,29 @@ export class ExamItemComponent implements OnInit {
   @Input() item: Exam;
   private num: number;
   private message: string;
-
+  public state: string;
   constructor(public snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
-    console.log('item is', this.item);
+    const startTime = Date.parse(this.item.startTime);
+    console.log('startTime is ', startTime);
+    const endTime = Date.parse(this.item.endTime);
+    const currentTime = new Date().getUTCMilliseconds;
+    console.log('当前时间为', currentTime);
+    if (currentTime >= startTime && endTime < currentTime) {
+      console.log('doing');
+    } else if (startTime > currentTime) {
+      // 还未开始
+      console.log('还未开始');
+    } else if (currentTime > endTime) {
+      // 已经结束
+      console.log('已经结束');
+    }
   }
 
   startExam() {
     //  弹出吐司
     this.num = Math.random() * 10;
-    console.log(`num is ${this.num}`);
     if (this.num <= 4) {
       this.message = '我劝天公重抖擞，不拘一格降人才。';
     } else if (this.num <= 7 && this.num > 4) {
@@ -36,7 +48,6 @@ export class ExamItemComponent implements OnInit {
       duration: 2000,
     });
     // 路由转跳
-    console.log('item id is ', this.item.pagesId);
-    this.router.navigate(['/page', this.item.pagesId,this.item.classId]);
+    this.router.navigate(['/page', this.item.pagesId, this.item.classId]);
   }
 }

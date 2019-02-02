@@ -18,10 +18,21 @@ export class PageComponent implements OnInit {
    */
   public multipleChoices: Array<Problem> = [];
   /**
+   * 填空题数据
+   */
+  public blankProblems: Array<Problem> = [];
+  /**
+   * 简答题数据
+   */
+  public questionAndAnswers: Array<Problem> = [];
+  /**
    * 选择题答题卡数据
    */
   public multipleChoicesCard: Array<StudentAns> = [];
-
+  /**
+   * 简答题答题卡
+   */
+  public questionCard: Array<StudentAns> = [];
   /**
    * 填空题答题卡数据
    */
@@ -36,7 +47,6 @@ export class PageComponent implements OnInit {
    * 计时器
    */
   public timeDown: Date = new Date();
-  public blankProblems: Array<Problem>;
 
   public answers: Array<Answer> = [];
   private pagesId: number;
@@ -57,16 +67,33 @@ export class PageComponent implements OnInit {
     this.pageService.getProblem(this.classId, this.pagesId).subscribe(next => {
       this.multipleChoices = next.data.signChoice;
       this.blankProblems = next.data.blank;
+      this.questionAndAnswers = next.data.ansQuestion;
       this.multipleChoicesCard.length = this.multipleChoices.length;
+      this.gapFillingCard.length = this.blankProblems.length;
+      this.questionCard.length = this.questionAndAnswers.length;
       for (let i = 0; i < this.multipleChoicesCard.length; i++) {
-        const studentChoice = new StudentAns();
+        const studentAns = new StudentAns();
         // 题号是从1题开始的
-        studentChoice.titleNumber = i + 1;
-        studentChoice.ans = '';
-        this.multipleChoicesCard[i] = studentChoice;
+        studentAns.titleNumber = i + 1;
+        studentAns.ans = '';
+        this.multipleChoicesCard[i] = studentAns;
+      }
+      for (let i = 0; i < this.gapFillingCard.length; i++) {
+        const studentAns = new StudentAns();
+        // 题号是从1题开始的
+        studentAns.titleNumber = i + 1;
+        studentAns.ans = '';
+        this.gapFillingCard[i] = studentAns;
+      }
+
+      for (let i = 0; i < this.questionAndAnswers.length; i++) {
+        const studentAns = new StudentAns();
+        // 题号是从1题开始的
+        studentAns.titleNumber = i + 1;
+        studentAns.ans = '';
+        this.questionCard[i] = studentAns;
       }
     });
-    
 
     this.resetTime(this.time);
   }
@@ -82,7 +109,6 @@ export class PageComponent implements OnInit {
         }
       }
     }
-    console.log('card is ', this.multipleChoicesCard);
   }
 
   /**
@@ -96,7 +122,6 @@ export class PageComponent implements OnInit {
    * @param studentAns 填空题答案
    */
   showGapFillingAnswer(ans: StudentAns) {
-    console.log('填空题是', ans);
     if (ans !== undefined) {
       for (let i = 0; i < this.gapFillingCard.length; i++) {
         if (ans.titleNumber === this.gapFillingCard[i].titleNumber) {
@@ -104,7 +129,19 @@ export class PageComponent implements OnInit {
         }
       }
     }
-    console.log('填空题答题卡', this.gapFillingCard);
+  }
+  /**
+   * 
+   * @param ans ji
+   */
+  showQuestionAnswer(ans: StudentAns) {
+    if (ans !== undefined) {
+      for (let i = 0; i < this.questionCard.length; i++) {
+        if (ans.titleNumber === this.questionCard[i].titleNumber) {
+          this.questionCard.splice(i, 1, ans);
+        }
+      }
+    }
   }
 
   /**

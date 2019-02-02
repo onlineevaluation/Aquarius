@@ -1,5 +1,5 @@
 <div class="context">
-  第{{ data.studentChoice.titleNumber }}题
+  选择:第{{ data.studentChoice.titleNumber }}题
   <mat-radio-group class="radio-group" (change)="getChoice($event)">
     <mat-radio-button class="radio" value="A" [checked]="isCheck_A">
       {{ data.choice[0] }}

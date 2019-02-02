@@ -55,7 +55,16 @@
     </div>
     <mat-divider></mat-divider>
     <!-- 简答题 -->
-    <div><h4>简答题</h4></div>
+    <h4>简答题</h4>
+
+    <div class="problem-card">
+      <app-question-answer
+        *ngFor="let question of questionAndAnswers; index as i"
+        [question]="question"
+        [index]="i"
+        (questionAns)="showQuestionAnswer($event)"
+      ></app-question-answer>
+    </div>
     <mat-divider class="divider"></mat-divider>
     <!-- 代码题 -->
     <h4>代码题</h4>
@@ -81,7 +90,7 @@
             <mat-grid-tile
               class="grid-tile"
               *ngFor="let card of multipleChoicesCard; index as i"
-              [style.background-color]="card.ans === '' ? 'red' : 'green'"
+              [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
             >
               {{ i + 1 }}
             </mat-grid-tile>
@@ -93,7 +102,7 @@
             <mat-grid-tile
               class="grid-tile"
               *ngFor="let card of gapFillingCard; index as i"
-              [style.background-color]="card.ans === '' ? 'red' : 'green'"
+              [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
             >
               {{ i + 1 }}
             </mat-grid-tile>
@@ -104,14 +113,18 @@
         <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
           <mat-grid-tile
             class="grid-tile"
-            *ngFor="let card of multipleChoicesCard; index as i"
-            [style.background-color]="card.choiced === '' ? 'red' : 'green'"
+            *ngFor="let card of questionCard; index as i"
+            [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
           >
             {{ i + 1 }}
           </mat-grid-tile>
         </mat-grid-list>
+        <div class="tips">
+          <div class="done">已做</div>
+          <div class="doing">未做</div>
+        </div>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions class="card-action">
         <button mat-raised-button color="accent">交卷</button>
       </mat-card-actions>
     </mat-card>

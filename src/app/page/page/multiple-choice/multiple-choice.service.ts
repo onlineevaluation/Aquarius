@@ -36,6 +36,5 @@ export class MultipleChoiceService {
         this.choiceList.push(studentChoice);
       }
     }
-    console.log("choice is ",this.choiceList)
   }
 }
