@@ -17,18 +17,16 @@ export class ExamItemComponent implements OnInit {
 
   ngOnInit() {
     const startTime = Date.parse(this.item.startTime);
-    console.log('startTime is ', startTime);
     const endTime = Date.parse(this.item.endTime);
-    const currentTime = new Date().getUTCMilliseconds;
-    console.log('当前时间为', currentTime);
-    if (currentTime >= startTime && endTime < currentTime) {
-      console.log('doing');
+    const currentTime = Date.parse(Date());
+    if (currentTime >= startTime && endTime > currentTime) {
+      this.state = '正在考试中';
     } else if (startTime > currentTime) {
       // 还未开始
-      console.log('还未开始');
+      this.state = '未进行考试';
     } else if (currentTime > endTime) {
       // 已经结束
-      console.log('已经结束');
+      this.state = '考试已经结束';
     }
   }
 
