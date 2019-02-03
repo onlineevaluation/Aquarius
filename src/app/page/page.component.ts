@@ -6,6 +6,8 @@ import { Problem } from '../domain/Problem';
 import { StudentAns } from '../domain/StudentAns';
 import { PageService } from './page.service';
 import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 @Component({
   selector: 'app-page',
@@ -42,11 +44,10 @@ export class PageComponent implements OnInit {
     new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
   ];
   public msg: string = '时分秒';
-  private time = 3600000;
   /**
-   * 计时器
+   * 倒计时时间
    */
-  public timeDown: Date = new Date();
+  private time = 3600000;
 
   public answers: Array<Answer> = [];
   private pagesId: number;
@@ -55,7 +56,9 @@ export class PageComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private pageService: PageService,
+    private matDialog: MatDialog,
     public multipleService: MultipleChoiceService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -131,8 +134,8 @@ export class PageComponent implements OnInit {
     }
   }
   /**
-   * 
-   * @param ans ji
+   *
+   * @param ans 简答题答案
    */
   showQuestionAnswer(ans: StudentAns) {
     if (ans !== undefined) {
@@ -157,8 +160,45 @@ export class PageComponent implements OnInit {
         setTimeout(countdown, 1000);
       } else {
         // 交卷
+        that.submitAns();
       }
     }
     countdown();
+  }
+
+  /**
+   * 提交答案
+   */
+  submitAns() {
+    // 提示框
+    const ref = this.matDialog.open(SubmitDialogComponent, {
+      data: {
+        time: this.msg,
+        pageId: this.pagesId,
+        choiceCard: this.multipleChoicesCard,
+        gapFillCard: this.gapFillingCard,
+        questionCard: this.questionCard,
+      },
+    });
+    ref.afterClosed().subscribe(
+      next => {
+        switch (next.msg) {
+          case '':
+            break;
+          case 'success':
+            // 路由跳转
+            break;
+          default:
+            this.snackBar.open(next.msg, '关闭', {
+              duration: 2000,
+            });
+            // 错误信息
+            break;
+        }
+      },
+      error => {
+        console.log('error');
+      },
+    );
   }
 }

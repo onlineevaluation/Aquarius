@@ -20,7 +20,6 @@ export class NoopInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     let request: HttpRequest<any>;
-    let url: string;
     // 登录无需要token
     if (req.url === '/user/login') {
       request = req.clone({

@@ -9,13 +9,14 @@ import { CodeEditorComponent } from './page/code-editor/code-editor.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { PageService } from './page.service';
 import { SelectSheetComponent } from './page/multiple-choice/select-sheet/select-sheet.component';
-import { MatBottomSheetModule } from '@angular/material';
+import { MatBottomSheetModule, MatDialogModule } from '@angular/material';
 import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 import { BlankSheetComponent } from './page/gap-filling/blank-sheet/blank-sheet.component';
 import { QuestionAnswerComponent } from './page/question-answer/question-answer.component';
 import { GapFillingService } from './page/gap-filling/gap-filling.service';
 import { QuestionSheetComponent } from './page/question-answer/question-sheet/question-sheet.component';
 import { QuestionAnswerService } from './page/question-answer/question-answer.service';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,13 @@ import { QuestionAnswerService } from './page/question-answer/question-answer.se
     BlankSheetComponent,
     QuestionAnswerComponent,
     QuestionSheetComponent,
+    SubmitDialogComponent,
   ],
   imports: [
     SharedModule,
     MatBottomSheetModule,
     PageRoutingModule,
+    MatDialogModule,
     MonacoEditorModule.forRoot(),
   ],
   providers: [
@@ -44,6 +47,7 @@ import { QuestionAnswerService } from './page/question-answer/question-answer.se
     SelectSheetComponent,
     BlankSheetComponent,
     QuestionSheetComponent,
+    SubmitDialogComponent,
   ],
 })
 export class PageModule {}

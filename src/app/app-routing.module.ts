@@ -13,8 +13,9 @@ const routes: Routes = [
   {
     path: 'page/:pageId/:classId',
     loadChildren: './page/page.module#PageModule',
+    canLoad: [CanLoginGuard],
   },
-  { path: 'test' , component: TestComponent},
+  { path: 'test', component: TestComponent },
   // 404 页面
   { path: '**', loadChildren: './code404/code404.module#Code404Module' },
 ];

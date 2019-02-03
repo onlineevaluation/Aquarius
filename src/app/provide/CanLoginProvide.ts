@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import {
-  CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
+  CanActivate,
   CanLoad,
   Route,
   Router,
+  RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class CanLoginGuard implements CanActivate, CanLoad {
-  
-  constructor(private router:Router,private snackBar: MatSnackBar){}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -28,17 +27,19 @@ export class CanLoginGuard implements CanActivate, CanLoad {
   check(): Observable<boolean> {
     return new Observable(observer => {
       const token = localStorage.getItem('token');
-      if (token != null) {
+      if (token === null) {
+        this.snackBar.open('没有登录，请先登录', '关闭', {
+          duration: 2000,
+        });
+        observer.next(false);
+        observer.complete();
+        this.router.navigateByUrl('/login');
+        return;
+      } else {
         observer.next(true);
         observer.complete();
         return;
       }
-      this.snackBar.open('没有登录，请先登录', '关闭', {
-        duration: 2000,
-      });
-      observer.next(false);
-      observer.complete();
-      this.router.navigateByUrl("/login")
     });
   }
 }
