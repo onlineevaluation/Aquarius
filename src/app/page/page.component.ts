@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Answer } from '../domain/Answer';
 import { CodeProblem } from '../domain/CodeProblem';
 import { Problem } from '../domain/Problem';
@@ -54,7 +54,8 @@ export class PageComponent implements OnInit {
   private classId: number;
 
   constructor(
-    private router: ActivatedRoute,
+    private activateRouter: ActivatedRoute,
+    private router: Router,
     private pageService: PageService,
     private matDialog: MatDialog,
     public multipleService: MultipleChoiceService,
@@ -62,7 +63,7 @@ export class PageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.router.params.subscribe((params: Params) => {
+    this.activateRouter.params.subscribe((params: Params) => {
       this.pagesId = params['pageId'];
       this.classId = params['classId'];
     });
@@ -187,6 +188,7 @@ export class PageComponent implements OnInit {
             break;
           case 'success':
             // 路由跳转
+            this.router.navigateByUrl('/score');
             break;
           default:
             this.snackBar.open(next.msg, '关闭', {
@@ -197,7 +199,7 @@ export class PageComponent implements OnInit {
         }
       },
       error => {
-        console.log('error');
+        console.log('error', error);
       },
     );
   }

@@ -1,0 +1,29 @@
+.card {
+    width: 500px;
+}
+
+.item-list {
+    margin: 20px;
+    p {
+        text-align: center
+    }
+    icon {
+        margin: 0 auto;
+    }
+}
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    justify-items: center;
+    .score-list {
+        margin: 20px;
+    }
+    .score-graph {
+        margin: 20px;
+        justify-self: center;
+        .score-card {
+            width: 500px;
+        }
+    }
+}

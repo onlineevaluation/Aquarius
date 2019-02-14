@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PageService } from '../page.service';
-import { Result } from 'src/app/domain/Result';
 
 @Component({
   selector: 'app-submit-dialog',

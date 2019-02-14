@@ -15,35 +15,6 @@
     justify-content: center;
 }
 
-.problem-content {
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-align-items: center;
-    flex-direction: column;
-    .divider {
-        margin-top: 30px;
-        width: 100%;
-        margin-bottom: 30px;
-    }
-}
-
-.problem-card {
-    width: 80%;
-    margin-bottom: 20px;
-    app-multiple-choice {
-        margin-top: 30px;
-    }
-    app-gap-filling {
-        margin-top: 30px;
-    }
-    .code-editor {
-        height: 300px;
-    }
-}
-
 .page-content {
     display: flex;
     justify-content: space-between;
@@ -51,6 +22,33 @@
     .student-ans-card {
         margin-right: 40px;
         margin-top: 60px;
+    }
+    .problem-content {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        -webkit-align-items: center;
+        flex-direction: column;
+        .divider {
+            margin-top: 30px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+    }
+    .problem-card {
+        width: 80%;
+        margin-bottom: 20px;
+        app-multiple-choice {
+            margin-top: 30px;
+        }
+        app-gap-filling {
+            margin-top: 30px;
+        }
+        .code-editor {
+            height: 300px;
+        }
     }
 }
 

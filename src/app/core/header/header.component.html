@@ -1,7 +1,11 @@
 <mat-toolbar color="primary" [class.mat-elevation-z4]="true">
   <span>自动判题系统</span>
-  <button mat-button class="header-btn">考试中心</button>
-  <button mat-button class="header-btn">试卷结果</button>
+  <button mat-button class="header-btn" (click)="routerToExam()">
+    考试中心
+  </button>
+  <button mat-button (click)="routerToScore()">试卷结果</button>
   <span class="fill-remaining-space"></span>
-  <button mat-button class="header-btn">个人中心</button>
+  <button mat-button class="header-btn" (click)="routerToUser()">
+    个人中心
+  </button>
 </mat-toolbar>

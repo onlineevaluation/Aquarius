@@ -38,7 +38,7 @@ export class PageService {
   ): Observable<Result> {
     const studentResult = new StudentResult();
     studentResult.pageId = pageId;
-    studentResult.studentId = authInfo().exp;
+    studentResult.studentId = authInfo().userId;
     choiceAns
       .filter(item => item.problemId !== undefined)
       .forEach(item => {
@@ -65,6 +65,9 @@ export class PageService {
       });
     console.log('student ans are', studentResult);
 
-    return this.http.post<Result>('/page/addAns', { json: studentResult });
+    return this.http.post<Result>(
+      '/page/addAns',
+      JSON.stringify(studentResult),
+    );
   }
 }

@@ -13,10 +13,12 @@ import {
   MatSelectModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatListModule,
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from '../http-interceptors';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [],
@@ -37,6 +39,8 @@ import { httpInterceptorProviders } from '../http-interceptors';
     MatGridListModule,
     MatSelectModule,
     HttpClientModule,
+    MatListModule,
+    NgxEchartsModule,
   ],
   exports: [
     HttpClientModule,
@@ -55,7 +59,9 @@ import { httpInterceptorProviders } from '../http-interceptors';
     MatRadioModule,
     MatGridListModule,
     MatSelectModule,
+    MatListModule,
+    NgxEchartsModule,
   ],
- providers:[httpInterceptorProviders]
+  providers: [httpInterceptorProviders],
 })
 export class SharedModule {}
