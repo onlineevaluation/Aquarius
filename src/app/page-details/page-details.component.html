@@ -5,21 +5,19 @@
     <mat-grid-tile>姓名</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile>
     <mat-grid-tile>科目</mat-grid-tile>
-    <mat-grid-tile>6</mat-grid-tile>
+    <mat-grid-tile>{{ pageDetails.course }}</mat-grid-tile>
     <mat-grid-tile>试卷名称</mat-grid-tile>
     <mat-grid-tile>2</mat-grid-tile>
     <mat-grid-tile>完成时间</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile>
     <mat-grid-tile>分数</mat-grid-tile>
-    <mat-grid-tile> {{pageInfo.score}} </mat-grid-tile>
-    <mat-grid-tile>
-      <button mat-raised-button>打印成绩单</button>
-    </mat-grid-tile>
+    <mat-grid-tile> {{ pageDetails.score }} </mat-grid-tile>
   </mat-grid-list>
 </div>
 <div>
-
   试卷详情
 
-
+  <app-details-item></app-details-item>
 </div>
+
+<button mat-fab color="accent">Accent</button>
