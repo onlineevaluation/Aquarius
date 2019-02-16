@@ -1,11 +1,10 @@
-export class PageDetails {
+export class Details {
   id: number;
   score: number;
   pageId: number;
   pageTitle: string;
   course: string;
   doTime: string;
-
   select: Array<StudentAnswerSelect> = [];
   blank: Array<StudentAnswer> = [];
   ans: Array<StudentAnswer> = [];

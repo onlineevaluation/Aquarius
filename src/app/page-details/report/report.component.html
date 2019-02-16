@@ -1,0 +1,21 @@
+<mat-dialog-content>
+  <p>{{ problem.id }}.{{ problem.title }}</p>
+  <b>
+    你的答案:
+  </b>
+  {{ problem.answer }}
+  <br />
+  <b>
+    标准答案:
+  </b>
+  {{ problem.standardAnswer }}
+
+  <br />
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="你的问题" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary">提交</button>
+  <button mat-dialog-close mat-raised-button>关闭</button>
+</mat-dialog-actions>

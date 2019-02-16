@@ -4,8 +4,11 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
+  HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 /**
  * @author 杨晓辉
@@ -14,6 +17,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class NoopInterceptor implements HttpInterceptor {
   private baseUrl = 'http://localhost:8081';
+
+  constructor(private router: Router) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -35,6 +40,7 @@ export class NoopInterceptor implements HttpInterceptor {
         ),
       });
     }
+
     return next.handle(request);
   }
 }

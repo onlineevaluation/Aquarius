@@ -1,3 +1,32 @@
+<p><b>题目：</b> {{ item.title }}</p>
+
+<span [ngSwitch]="item.sectionA != null">
+  <div *ngSwitchCase="true">
+    <b>
+      <p>选项A：{{ item.sectionA }}</p>
+      <p>选项B：{{ item.sectionB }}</p>
+      <p>选项C：{{ item.sectionC }}</p>
+      <p>选项D：{{ item.sectionD }}</p>
+    </b>
+  </div>
+</span>
+
 <p>
-  details-item works!
+  <b>
+    你的答案：
+  </b>
+  {{ item.answer }}
+  <br />
+  <b>
+    标准答案 :
+  </b>
+  {{ item.standardAnswer }} <br />
+  <b> 得分{{ item.score }} </b>
 </p>
+<!-- <button mat-mini-fab color="colors" (click)="doCollect()">
+  <mat-icon>favorite</mat-icon>
+</button> -->
+<button mat-raised-button color="primary" class="btn-report" (click)="report()">
+  报告问题
+</button>
+<mat-divider></mat-divider>

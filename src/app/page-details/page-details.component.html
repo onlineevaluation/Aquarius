@@ -1,23 +1,32 @@
 <div class="header">
-  <mat-grid-list cols="6" rowHeight="30" class="grid-list">
+  <mat-grid-list cols="6" rowHeight="40" class="grid-list">
     <mat-grid-tile>学号</mat-grid-tile>
-    <mat-grid-tile>{{ studentNumber }}</mat-grid-tile>
+    <mat-grid-tile> {{ studentNumber }} </mat-grid-tile>
     <mat-grid-tile>姓名</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile>
     <mat-grid-tile>科目</mat-grid-tile>
-    <mat-grid-tile>{{ pageDetails.course }}</mat-grid-tile>
+    <mat-grid-tile> {{ details.course }} </mat-grid-tile>
     <mat-grid-tile>试卷名称</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile> {{ details.pageTitle }} </mat-grid-tile>
     <mat-grid-tile>完成时间</mat-grid-tile>
     <mat-grid-tile>4</mat-grid-tile>
     <mat-grid-tile>分数</mat-grid-tile>
-    <mat-grid-tile> {{ pageDetails.score }} </mat-grid-tile>
+    <mat-grid-tile> {{ details.score }} </mat-grid-tile>
   </mat-grid-list>
 </div>
-<div>
-  试卷详情
+<div class="item-list">
+  <app-details-item *ngFor="let item of details.select" [item]="item">
+  </app-details-item>
 
-  <app-details-item></app-details-item>
+  <app-details-item
+    *ngFor="let item of details.blank"
+    [item]="item"
+  ></app-details-item>
+
+  <app-details-item
+    *ngFor="let item of details.ans"
+    [item]="item"
+  ></app-details-item>
 </div>
 
 <button mat-fab color="accent">Accent</button>
