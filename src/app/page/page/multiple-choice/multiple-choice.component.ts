@@ -21,20 +21,23 @@ export class MultipleChoiceComponent implements OnInit {
   @Input() index: number;
   @Output() public answered = new EventEmitter<any>();
   public cardList;
+
   constructor(
     private bottomSheet: MatBottomSheet,
     private multipleService: MultipleChoiceService,
-  ) {}
+  ) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   /**
    * 将题号和选择存起来
    * @param titleNumber 题号
    */
   openChoice(titleNumber: number) {
-    let choiceList = this.multipleService.choiceList;
-    var flag = choiceList.find(item => item.titleNumber === titleNumber);
+    const choiceList = this.multipleService.choiceList;
+    const flag = choiceList.find(item => item.titleNumber === titleNumber);
     let studentChoice = new StudentAns();
     if (flag === undefined) {
       studentChoice.titleNumber = titleNumber;
@@ -44,7 +47,7 @@ export class MultipleChoiceComponent implements OnInit {
       studentChoice = flag;
     }
     // 下面非常有用 上面垃圾但是还不能删除，有时间重构
-    let resultRef = this.bottomSheet.open(SelectSheetComponent, {
+    const resultRef = this.bottomSheet.open(SelectSheetComponent, {
       data: {
         choice: [
           this.multipleChoice.sectionA,

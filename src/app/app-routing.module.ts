@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: './score/score.module#ScoreModule',
     canLoad: [CanLoginGuard],
   },
+  {
+    path: 'pageDetails/:pageId',
+    loadChildren: './page-details/page-details.module#PageDetailsModule',
+    canLoad: [CanLoginGuard],
+  },
   { path: 'test', component: TestComponent },
   // 404 页面
   { path: '**', loadChildren: './code404/code404.module#Code404Module' },

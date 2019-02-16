@@ -1,13 +1,17 @@
 header main {
-  position: absolute;
+    position: absolute;
 }
 
-main footer{
-  overflow: auto;
+main footer {
+    overflow: auto;
 }
 
 .square {
-  width: 100px;
-  height: 100px;
-  background: red;
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+.header {
+    z-index: 2;
 }

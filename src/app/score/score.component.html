@@ -6,13 +6,14 @@
       <mat-list-item
         *ngFor="let item of scoreList; index as i"
         class="item-list"
+        (click)="openDetails(item.pagesId)"
       >
         <mat-card class="card">
           <p class="p-text">
             {{ i + 1 }}
-            <mat-icon class="icon">label</mat-icon> <span>名称</span> | 得分：{{
-              item.score
-            }}| <mat-icon>schedule</mat-icon> 完成日期
+            <mat-icon class="icon">label</mat-icon>
+            {{ item.pageTitle }} <br />
+            得分：{{ item.score }}| <mat-icon>schedule</mat-icon> 完成日期
             {{ item.time | date: 'medium' }}
           </p>
         </mat-card>
@@ -22,16 +23,12 @@
   <div class="score-graph">
     <mat-card class="score-card">
       <mat-card-title>成绩曲线</mat-card-title>
-      <mat-card-subtitle
-        >排名曲线:越低越好 成绩曲线：越高越好</mat-card-subtitle
-      >
+      <mat-card-subtitle>
+        排名曲线:越低越好 成绩曲线：越高越好
+      </mat-card-subtitle>
       <mat-card-content>
         <div echarts [options]="chartOption" class="demo-chart"></div>
       </mat-card-content>
-
-      <mat-card-footer>
-        <h3></h3>
-      </mat-card-footer>
     </mat-card>
   </div>
 </div>

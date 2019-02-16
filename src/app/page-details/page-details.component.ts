@@ -10,11 +10,14 @@ import { authInfo } from '../utils/auth.util';
 })
 export class PageDetailsComponent implements OnInit {
   private pageId: number;
+  public pageInfo: any;
   public studentNumber = authInfo().auth;
+
   constructor(
     private activateRouter: ActivatedRoute,
     private pageDetailsService: PageDetailsService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.activateRouter.params.subscribe((params: Params) => {
@@ -23,6 +26,9 @@ export class PageDetailsComponent implements OnInit {
     console.log('pageid is ', this.pageId);
     this.pageDetailsService.getPageDetail(this.pageId).subscribe(next => {
       console.log('试卷详情 ', next);
+      this.pageInfo = next;
+
+      console.log('page info ', this.pageInfo);
     });
   }
 }

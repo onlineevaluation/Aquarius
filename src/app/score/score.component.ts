@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ScoreService } from './score.service';
 import { ScoreItem } from '../domain/ScoreItem';
 import { EChartOption } from 'echarts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-score',
@@ -17,7 +18,7 @@ export class ScoreComponent implements OnInit {
   public chartOption: any;
   // EChartOption =
 
-  constructor(private scoreService: ScoreService) {}
+  constructor(private scoreService: ScoreService, private router: Router) {}
 
   ngOnInit() {
     this.scoreService.getStudentScore().subscribe(next => {
@@ -30,6 +31,7 @@ export class ScoreComponent implements OnInit {
         this.classRankData.push(item.classRank);
         // this.gradeRankData.push(item.grad)
       });
+      // 图表数据展示和设置
       this.chartOption = {
         tooltip: {
           trigger: 'axis',
@@ -84,5 +86,9 @@ export class ScoreComponent implements OnInit {
         ],
       };
     });
+  }
+
+  openDetails(pagesId: number) {
+    this.router.navigate(['/pageDetails', pagesId]);
   }
 }

@@ -18,7 +18,6 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from '../http-interceptors';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [],
@@ -40,7 +39,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
     MatSelectModule,
     HttpClientModule,
     MatListModule,
-    NgxEchartsModule,
   ],
   exports: [
     HttpClientModule,
@@ -60,7 +58,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
     MatGridListModule,
     MatSelectModule,
     MatListModule,
-    NgxEchartsModule,
   ],
   providers: [httpInterceptorProviders],
 })
