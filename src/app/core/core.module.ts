@@ -2,14 +2,14 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SharedModule } from '../shared/shared.module';
-import { MatIconRegistry } from '@angular/material';
+import { MatIconRegistry, MatMenuModule } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { loadSvgResource } from '../utils/svg.util';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
-  imports: [SharedModule, BrowserAnimationsModule],
+  imports: [SharedModule, BrowserAnimationsModule, MatMenuModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {

@@ -1,0 +1,23 @@
+.content {
+    margin: 20px;
+}
+
+.header-card {
+    display: flex;
+    .info {
+        margin-left: 20px;
+    }
+}
+
+.body-card {
+    margin-top: 20px;
+    display: flex;
+    .left-card {
+        flex: 1;
+        margin-right: 10px;
+    }
+    .right-card {
+        flex: 1;
+        margin-left: 10px;
+    }
+}

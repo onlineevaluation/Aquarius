@@ -19,5 +19,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/score');
   }
 
-  routerToUser() {}
+  routerToUser() {
+    this.router.navigateByUrl('/profile');
+  }
 }

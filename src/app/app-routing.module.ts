@@ -26,6 +26,7 @@ const routes: Routes = [
     canLoad: [CanLoginGuard],
   },
   { path: 'test', component: TestComponent },
+  { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
   // 404 页面
   { path: '**', loadChildren: './code404/code404.module#Code404Module' },
 ];
