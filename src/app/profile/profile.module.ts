@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import { SharedModule } from '../shared/shared.module';
-import { AvtorComponent } from './avtor/avtor.component';
+import { AvatarComponent } from './avatar/avatar.component';
+
 @NgModule({
-  declarations: [ProfileComponent, AvtorComponent],
+  declarations: [ProfileComponent, AvatarComponent],
   imports: [CommonModule, ProfileRoutingModule, SharedModule],
 })
 export class ProfileModule {}

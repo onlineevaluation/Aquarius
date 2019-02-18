@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CanLoginGuard } from './provide/CanLoginProvide';
-import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginModule' },
@@ -25,7 +24,6 @@ const routes: Routes = [
     loadChildren: './page-details/page-details.module#PageDetailsModule',
     canLoad: [CanLoginGuard],
   },
-  { path: 'test', component: TestComponent },
   { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
   // 404 页面
   { path: '**', loadChildren: './code404/code404.module#Code404Module' },

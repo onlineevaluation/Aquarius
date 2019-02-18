@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Result } from '../domain/Result';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtUser } from '../domain/JwtUser';
+import { authInfo } from '../utils/auth.util';
 @Injectable()
 export class LoginService {
   constructor(
@@ -32,6 +33,14 @@ export class LoginService {
           jwtUser.userId = user.userId;
           // 将用户设置一下
           localStorage.setItem('token', `Bearer ${result.data}`);
+
+          this.http
+            .get<Result>(`/user/profile/${authInfo().userId}`)
+            .subscribe((result: Result) => {
+              console.log('result is ', result);
+              localStorage.setItem('profile', JSON.stringify(result.data));
+            });
+
           return true;
         },
         error => {

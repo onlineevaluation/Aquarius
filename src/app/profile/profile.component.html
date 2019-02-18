@@ -1,14 +1,19 @@
 <div class="content">
   <mat-card class="header-card">
-    <app-avtor class="avtor"></app-avtor>
+    <app-avatar class="avtor" [showName]="firstName"></app-avatar>
     <div class="info">
-      杨晓辉
-      <p>1514010631</p>
+      {{ profile.name }}
+      <p>{{ profile.studentNumber }}</p>
     </div>
   </mat-card>
 
   <div class="body-card">
-    <mat-card class="left-card">1</mat-card>
-    <mat-card class="right-card">2</mat-card>
+    <mat-card class="left-card">
+      <mat-card-title>成绩情况</mat-card-title>
+    </mat-card>
+
+    <mat-card class="right-card">
+      <mat-card-title>课程推荐</mat-card-title>
+    </mat-card>
   </div>
 </div>
