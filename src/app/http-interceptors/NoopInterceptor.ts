@@ -5,9 +5,10 @@ import {
   HttpHandler,
   HttpEvent,
   HttpErrorResponse,
+  HttpResponse,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 /**
@@ -24,6 +25,7 @@ export class NoopInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
+    let ok: string;
     let request: HttpRequest<any>;
     // 登录无需要token
     if (req.url === '/user/login') {
@@ -41,6 +43,21 @@ export class NoopInterceptor implements HttpInterceptor {
       });
     }
 
-    return next.handle(request);
+    return next.handle(request).pipe(
+      tap(
+        event => (ok = event instanceof HttpErrorResponse ? 'success' : ''),
+        (error: HttpErrorResponse) => {
+          switch (error.status) {
+            case 403:
+              // 登录错误，返回
+              console.log('403了');
+              localStorage.clear();
+              this.router.navigateByUrl('/login');
+              break;
+          }
+          console.log('拦截器的error', error);
+        },
+      ),
+    );
   }
 }
