@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CodeProblem } from '../../../domain/CodeProblem';
 import { Answer } from '../../../domain/Answer';
+import { StudentAns } from 'src/app/domain/StudentAns';
+import { Problem } from 'src/app/domain/Problem';
 
 @Component({
   selector: 'app-code-editor',
@@ -8,8 +10,9 @@ import { Answer } from '../../../domain/Answer';
   styleUrls: ['./code-editor.component.scss'],
 })
 export class CodeEditorComponent implements OnInit {
-  @Input() problem: CodeProblem;
-  @Output() public answered = new EventEmitter<Answer>();
+  @Input() problem: Problem;
+  @Input() index: number;
+  @Output() public answered = new EventEmitter<StudentAns>();
   languages: Array<string> = ['java', 'c'];
   themes: Array<string> = ['vs', 'vs-dark'];
   public code: any;
@@ -62,10 +65,9 @@ export class CodeEditorComponent implements OnInit {
    * 提交代码到服务器上
    */
   submitCode() {
-    console.log('code is ', this.code);
-    const ans = new Answer();
-    ans.id = this.problem.id;
-    ans.answer = this.code;
+    const ans = new StudentAns();
+    ans.titleNumber = this.problem.id;
+    ans.ans = this.code;
     this.answered.emit(ans);
   }
 }

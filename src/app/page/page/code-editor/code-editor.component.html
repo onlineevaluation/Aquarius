@@ -1,19 +1,24 @@
 <div class="problem-title">
-  {{problem.id}}. {{problem.title}}
+  {{ index + 1 }}. {{ problem.title }}
 
   <mat-chip-list>
-    <mat-chip color="primary" selected>内存要求:{{problem.memory}}</mat-chip>
-    <mat-chip color="accent" selected>时间要求:{{problem.time}}</mat-chip>
+    <mat-chip color="primary" selected
+      >内存要求:{{ problem.sectionA }}</mat-chip
+    >
+    <mat-chip color="accent" selected>时间要求:{{ problem.sectionB }}</mat-chip>
   </mat-chip-list>
-
 </div>
 
 <div>
   <!--语言-->
   <mat-form-field>
-    <mat-select placeholder="语言" [(value)]="selectedLan" (selectionChange)="languageChange(selectedLan)">
+    <mat-select
+      placeholder="语言"
+      [(value)]="selectedLan"
+      (selectionChange)="languageChange(selectedLan)"
+    >
       <mat-option *ngFor="let language of languages" [value]="language">
-        {{language}}
+        {{ language }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -21,15 +26,26 @@
   &nbsp;
 
   <!--主题-->
+
   <mat-form-field>
-    <mat-select placeholder="主题" [(value)]="selectedTheme" (selectionChange)="themeChange(selectedTheme)">
+    <mat-select
+      placeholder="主题"
+      [(value)]="selectedTheme"
+      (selectionChange)="themeChange(selectedTheme)"
+    >
       <mat-option *ngFor="let theme of themes" [value]="theme">
-        {{theme}}
+        {{ theme }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" class="code-editor"></ngx-monaco-editor>
+<ngx-monaco-editor
+  [options]="editorOptions"
+  [(ngModel)]="code"
+  class="code-editor"
+></ngx-monaco-editor>
 
-<button mat-raised-button color="accent" (click)="submitCode()">提交代码</button>
+<button mat-raised-button color="accent" (click)="submitCode()">
+  提交代码
+</button>

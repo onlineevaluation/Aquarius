@@ -28,9 +28,15 @@ export class PageComponent implements OnInit {
    */
   public questionAndAnswers: Array<Problem> = [];
   /**
+   * 算法试题
+   */
+  public algorithmAnswer: Array<Problem> = [];
+
+  /**
    * 选择题答题卡数据
    */
   public multipleChoicesCard: Array<StudentAns> = [];
+
   /**
    * 简答题答题卡
    */
@@ -39,7 +45,11 @@ export class PageComponent implements OnInit {
    * 填空题答题卡数据
    */
   public gapFillingCard: Array<StudentAns> = [];
-
+  /**
+   * 算法题
+   * todo()
+   */
+  public algorithmCard: Array<StudentAns> = [];
   public CodeProblems: Array<CodeProblem> = [
     new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
   ];
@@ -72,9 +82,12 @@ export class PageComponent implements OnInit {
       this.multipleChoices = next.data.signChoice;
       this.blankProblems = next.data.blank;
       this.questionAndAnswers = next.data.ansQuestion;
+      this.algorithmAnswer = next.data.algorithm;
       this.multipleChoicesCard.length = this.multipleChoices.length;
       this.gapFillingCard.length = this.blankProblems.length;
       this.questionCard.length = this.questionAndAnswers.length;
+      this.algorithmCard.length = this.algorithmAnswer.length;
+      console.log('算法试题', this.algorithmAnswer);
       for (let i = 0; i < this.multipleChoicesCard.length; i++) {
         const studentAns = new StudentAns();
         // 题号是从1题开始的
@@ -96,6 +109,14 @@ export class PageComponent implements OnInit {
         studentAns.titleNumber = i + 1;
         studentAns.ans = '';
         this.questionCard[i] = studentAns;
+      }
+
+      for (let i = 0; i < this.CodeProblems.length; i++) {
+        const studentAns = new StudentAns();
+        // 题号是从1题开始的
+        studentAns.titleNumber = i + 1;
+        studentAns.ans = '';
+        this.algorithmCard[i] = studentAns;
       }
     });
 
@@ -119,7 +140,23 @@ export class PageComponent implements OnInit {
    *
    * @param answer 获取代码题答案
    */
-  showCodeAnswer(answer: Answer) {}
+  showCodeAnswer(ans: StudentAns) {
+    for (let i = 0; i < this.algorithmCard.length; i++) {
+      if (this.algorithmCard[i].titleNumber === 1) {
+        this.algorithmCard.splice(i, 1, ans);
+      }
+
+      let flag = false;
+      if (ans.titleNumber === this.algorithmCard[i].titleNumber) {
+        this.algorithmCard.splice(i, 1, ans);
+        flag = true;
+      }
+      if (!flag) {
+        this.algorithmCard.push(ans);
+      }
+      break;
+    }
+  }
 
   /**
    * 获取填空题答案
@@ -179,6 +216,7 @@ export class PageComponent implements OnInit {
         choiceCard: this.multipleChoicesCard,
         gapFillCard: this.gapFillingCard,
         questionCard: this.questionCard,
+        algorithmCard: this.algorithmCard,
       },
     });
     ref.afterClosed().subscribe(

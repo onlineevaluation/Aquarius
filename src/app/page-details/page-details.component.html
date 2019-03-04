@@ -3,7 +3,7 @@
     <mat-grid-tile>学号</mat-grid-tile>
     <mat-grid-tile> {{ studentNumber }} </mat-grid-tile>
     <mat-grid-tile>姓名</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
+    <mat-grid-tile>{{ username }}</mat-grid-tile>
     <mat-grid-tile>科目</mat-grid-tile>
     <mat-grid-tile> {{ details.course }} </mat-grid-tile>
     <mat-grid-tile>试卷名称</mat-grid-tile>
@@ -28,5 +28,6 @@
     [item]="item"
   ></app-details-item>
 </div>
-
-<button mat-fab color="accent">Accent</button>
+<div class="fab-download">
+  <button mat-fab color="accent" class="download">下载</button>
+</div>

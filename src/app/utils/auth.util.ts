@@ -1,6 +1,8 @@
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtUser } from '../domain/JwtUser';
-
+/**
+ * 授权信息
+ */
 export const authInfo = () => {
   const jwtHelperService = new JwtHelperService();
   let token = localStorage.getItem('token');

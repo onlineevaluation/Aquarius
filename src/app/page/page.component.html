@@ -69,10 +69,19 @@
     <!-- 代码题 -->
     <h4>代码题</h4>
     <div class="problem-card ">
+      请仔细阅读下列注意事项
+      <ul>
+        <li>请确保代码包含 <code>main()</code> 函数</li>
+        <li>请确保函数有最后返回值 <code>return 0;</code></li>
+        <li>除要求的输入输出以外，请勿有其他输入输出</li>
+        <li>代码完成后点击<b>提交代码</b>，否则不计入成绩</li>
+        <li>使用<code>C/C++</code>的同学语言选择 <code>C</code></li>
+      </ul>
       <app-code-editor
         class="code-editor"
         [problem]="problem"
-        *ngFor="let problem of CodeProblems"
+        *ngFor="let problem of algorithmAnswer; index as i"
+        [index]="i"
         (answered)="showCodeAnswer($event)"
       ></app-code-editor>
     </div>

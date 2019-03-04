@@ -9,19 +9,31 @@ import { authInfo } from '../utils/auth.util';
 
 @Injectable()
 export class PageService {
-  constructor(private http: HttpClient) {}
+  private classId: number;
+  private pageId: number;
 
+  constructor(private http: HttpClient) {}
+  /**
+   * 获得试卷
+   * @param classId 班级id
+   * @param pageId 试卷id
+   */
   getProblem(classId: number, pageId: number): Observable<Result> {
+    this.classId = classId;
+    this.pageId = pageId;
     const params = new HttpParams()
       .set('classId', `${classId}`)
       .set('pageId', `${pageId}`);
 
     return this.http.get<Result>(`/page/exam`, { params }).pipe(
       map((result: Result) => {
+        console.log('page is ', result);
         return result;
       }),
     );
   }
+
+  getCode() {}
 
   /**
    * 将学生答案发送给后端
@@ -35,6 +47,7 @@ export class PageService {
     choiceAns: Array<StudentAns>,
     blankAns: Array<StudentAns>,
     questionAns: Array<StudentAns>,
+    algornreAns: Array<StudentAns>,
   ): Observable<Result> {
     const studentResult = new StudentResult();
     studentResult.pageId = pageId;
@@ -60,6 +73,14 @@ export class PageService {
       .forEach(item => {
         const ans = new Ans();
         ans.id = item.problemId;
+        ans.ans = item.ans;
+        studentResult.answer.push(ans);
+      });
+    algornreAns
+      .filter(item => item.titleNumber !== undefined)
+      .forEach(item => {
+        const ans = new Ans();
+        ans.id = item.titleNumber;
         ans.ans = item.ans;
         studentResult.answer.push(ans);
       });
