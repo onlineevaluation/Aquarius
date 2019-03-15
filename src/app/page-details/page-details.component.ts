@@ -26,6 +26,7 @@ export class PageDetailsComponent implements OnInit {
     // 获取试卷详细信息
     this.pageDetailsService.getPageDetail(this.pageId).subscribe(next => {
       this.details = next.data;
+      console.log('details,', this.details);
     });
     // 获取用户信息
     this.pageDetailsService.getUserProfile().subscribe(result => {

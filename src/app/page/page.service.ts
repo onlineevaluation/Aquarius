@@ -9,8 +9,6 @@ import { authInfo } from '../utils/auth.util';
 
 @Injectable()
 export class PageService {
-  private classId: number;
-  private pageId: number;
 
   constructor(private http: HttpClient) {}
   /**
@@ -19,8 +17,6 @@ export class PageService {
    * @param pageId 试卷id
    */
   getProblem(classId: number, pageId: number): Observable<Result> {
-    this.classId = classId;
-    this.pageId = pageId;
     const params = new HttpParams()
       .set('classId', `${classId}`)
       .set('pageId', `${pageId}`);
@@ -84,8 +80,6 @@ export class PageService {
         ans.ans = item.ans;
         studentResult.answer.push(ans);
       });
-    console.log('student ans are', studentResult);
-
     return this.http.post<Result>(
       '/page/addAns',
       JSON.stringify(studentResult),

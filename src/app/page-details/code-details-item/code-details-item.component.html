@@ -1,0 +1,10 @@
+题目： {{ item.title }}
+<br />
+得分： {{ item.score }}
+<li>左侧为你的答案，右侧为标准答案</li>
+
+<ngx-monaco-diff-editor
+  [options]="options"
+  [originalModel]="originalModel"
+  [modifiedModel]="modifiedModel"
+></ngx-monaco-diff-editor>

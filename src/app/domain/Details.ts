@@ -8,6 +8,7 @@ export class Details {
   select: Array<StudentAnswerSelect> = [];
   blank: Array<StudentAnswer> = [];
   ans: Array<StudentAnswer> = [];
+  algorithm: Array<StudentAnswer> = [];
 }
 
 class StudentAnswer {

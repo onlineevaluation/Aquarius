@@ -15,18 +15,24 @@
   </mat-grid-list>
 </div>
 <div class="item-list">
+  <!-- 选择题 -->
   <app-details-item *ngFor="let item of details.select" [item]="item">
   </app-details-item>
 
+  <!-- 填空题 -->
   <app-details-item
     *ngFor="let item of details.blank"
     [item]="item"
   ></app-details-item>
 
+  <!-- 简答题 -->
   <app-details-item
     *ngFor="let item of details.ans"
     [item]="item"
   ></app-details-item>
+  <!-- 算法题 -->
+  <app-code-details-item *ngFor="let item of details.algorithm" [item]="item">
+  </app-code-details-item>
 </div>
 <div class="fab-download">
   <button mat-fab color="accent" class="download">下载</button>
