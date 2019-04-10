@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Exam } from '../../domain/Exam';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { ExamService } from '../exam.service';
+import { authInfo } from 'src/app/utils/auth.util';
 
 @Component({
   selector: 'app-exam-item',
@@ -13,7 +15,11 @@ export class ExamItemComponent implements OnInit {
   private num: number;
   private message: string;
   public state: string;
-  constructor(public snackBar: MatSnackBar, private router: Router) {}
+  constructor(
+    public snackBar: MatSnackBar,
+    private router: Router,
+    private examService: ExamService,
+  ) {}
 
   ngOnInit() {
     const startTime = Date.parse(this.item.startTime);
@@ -31,6 +37,9 @@ export class ExamItemComponent implements OnInit {
   }
 
   startExam() {
+    const studentId = authInfo().userId;
+    // 校验试卷是否已经考试
+    this.examService.verifyPage(studentId, this.item.classId).subscribe();
     //  弹出吐司
     this.num = Math.random() * 10;
     if (this.num <= 4) {

@@ -25,7 +25,6 @@ export class LoginService {
         (result: Result) => {
           const user = this.jwtHelpService.decodeToken(result.data);
           const jwtUser = new JwtUser();
-          jwtUser.auth = user.auth;
           jwtUser.exp = user.exp;
           jwtUser.iat = user.iat;
           jwtUser.sub = user.sub;
@@ -33,11 +32,10 @@ export class LoginService {
           jwtUser.userId = user.userId;
           // 将用户设置一下
           localStorage.setItem('token', `Bearer ${result.data}`);
-
+          // 获取用户详细信息
           this.http
             .get<Result>(`/user/profile/${authInfo().userId}`)
             .subscribe((result: Result) => {
-              console.log('result is ', result);
               localStorage.setItem('profile', JSON.stringify(result.data));
             });
 

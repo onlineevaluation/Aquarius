@@ -1,7 +1,9 @@
 export class JwtUser {
-  auth: string;
   exp: number;
   iat: number;
+  /**
+   * 被签发者
+   */
   sub: string;
   /**
    * 用户id

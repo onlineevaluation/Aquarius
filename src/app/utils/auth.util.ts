@@ -9,7 +9,7 @@ export const authInfo = () => {
   const jwtUser = new JwtUser();
   if (token !== null) {
     const user = jwtHelperService.decodeToken(token);
-    jwtUser.auth = user.auth;
+    // jwtUser.auth = user.auth;
     jwtUser.exp = user.exp;
     jwtUser.iat = user.iat;
     jwtUser.sub = user.sub;

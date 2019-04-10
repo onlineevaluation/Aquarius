@@ -1,6 +1,6 @@
 export class Profile {
   classId: number;
-  name: String;
-  studentNumber: String;
+  name: string;
+  studentNumber: string;
   userId: number;
 }

@@ -5,7 +5,23 @@
   </button>
   <button mat-button (click)="routerToScore()">试卷结果</button>
   <span class="fill-remaining-space"></span>
-  <button mat-button class="header-btn" (click)="routerToUser()">
-    个人中心
-  </button>
+
+  <span [ngSwitch]="isLogin">
+    <!-- 登录 -->
+    <p *ngSwitchCase="true">
+      <button mat-button class="header-btn" (click)="routerToUser()">
+        {{ username }}
+      </button>
+      <button mat-button class="header-btn" (click)="routerToLogout()">
+        注销
+      </button>
+    </p>
+    <!-- 没有登录 -->
+    <p *ngSwitchCase="false">
+      <button mat-button class="header-btn" (click)="routerToUser()">
+        个人中心
+      </button>
+    </p>
+    <p *ngSwitchDefault></p>
+  </span>
 </mat-toolbar>

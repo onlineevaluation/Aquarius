@@ -1,143 +1,150 @@
-<!--试卷标题-->
-<mat-toolbar>
-  <mat-toolbar-row class="title-row">
-    <span class="fill-remaining-space "></span> <span>数据结构链表测试</span>
-    <span class="fill-remaining-space "></span>
-  </mat-toolbar-row>
+<div class="body-content">
+  <!--试卷标题-->
+  <mat-toolbar>
+    <mat-toolbar-row class="title-row">
+      <span class="fill-remaining-space "></span> <span>数据结构链表测试</span>
+      <span class="fill-remaining-space "></span>
+    </mat-toolbar-row>
 
-  <mat-toolbar-row class="data-row">
-    <span class="fill-remaining-space "></span>
-    <small>
-      姓名:张三 &nbsp; 出卷人:李四 &nbsp; 考试时间:1月7日09点18分-1月7日11点18分
-    </small>
-    <span class="fill-remaining-space "></span>
-  </mat-toolbar-row>
-</mat-toolbar>
+    <mat-toolbar-row class="data-row">
+      <span class="fill-remaining-space "></span>
+      <small>
+        姓名:张三 &nbsp; 出卷人:李四 &nbsp;
+        考试时间:1月7日09点18分-1月7日11点18分
+      </small>
+      <span class="fill-remaining-space "></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<!--试题类型-->
-<div class="problem-type">
-  <!--todo 锚点设置 我也不知道什么时候可以解决 -->
-  <mat-chip-list>
-    <mat-chip>单选题</mat-chip>
-    <mat-chip>填空题</mat-chip>
-    <mat-chip color="primary">简答题</mat-chip>
-    <mat-chip color="accent">编程题</mat-chip>
-  </mat-chip-list>
-</div>
-
-<mat-divider class="divider"></mat-divider>
-
-<div class="page-content">
-  <!--试卷答题区域-->
-  <div class="problem-content">
-    <h4 id="multiple-choice">单选题 &nbsp; (点击试题作答)</h4>
-    <!--单选题-->
-    <div class="problem-card">
-      <app-multiple-choice
-        *ngFor="let multipleChoice of multipleChoices; index as i"
-        [multipleChoice]="multipleChoice"
-        [index]="i"
-        (answered)="showMultipleAnswer($event)"
-      >
-      </app-multiple-choice>
-    </div>
-
-    <mat-divider class="divider"></mat-divider>
-    <!-- 填空题 -->
-    <h4>填空题 &nbsp; (点击试题作答)</h4>
-    <div class="problem-card">
-      <app-gap-filling
-        *ngFor="let blankProblem of blankProblems; index as i"
-        [blankProblem]="blankProblem"
-        [index]="i"
-        (blankAns)="showGapFillingAnswer($event)"
-      ></app-gap-filling>
-    </div>
-    <mat-divider></mat-divider>
-    <!-- 简答题 -->
-    <h4>简答题</h4>
-
-    <div class="problem-card">
-      <app-question-answer
-        *ngFor="let question of questionAndAnswers; index as i"
-        [question]="question"
-        [index]="i"
-        (questionAns)="showQuestionAnswer($event)"
-      ></app-question-answer>
-    </div>
-    <mat-divider class="divider"></mat-divider>
-    <!-- 代码题 -->
-    <h4>代码题</h4>
-    <div class="problem-card ">
-      请仔细阅读下列注意事项
-      <ul>
-        <li>请确保代码包含 <code>main()</code> 函数</li>
-        <li>请确保函数有最后返回值 <code>return 0;</code></li>
-        <li>除要求的输入输出以外，请勿有其他输入输出</li>
-        <li>代码完成后点击<b>提交代码</b>，否则不计入成绩</li>
-        <li>使用<code>C/C++</code>的同学语言选择 <code>C</code></li>
-      </ul>
-      <app-code-editor
-        class="code-editor"
-        [problem]="problem"
-        *ngFor="let problem of algorithmAnswer; index as i"
-        [index]="i"
-        (answered)="showCodeAnswer($event)"
-      ></app-code-editor>
-    </div>
+  <!--试题类型-->
+  <div class="problem-type">
+    <!--todo 锚点设置 我也不知道什么时候可以解决 -->
+    <mat-chip-list>
+      <mat-chip>单选题</mat-chip>
+      <mat-chip>填空题</mat-chip>
+      <mat-chip color="primary">简答题</mat-chip>
+      <mat-chip color="accent">编程题</mat-chip>
+    </mat-chip-list>
   </div>
-  <!--答题卡-->
-  <div class="student-ans-card">
-    <!--选择题-->
-    <mat-card>
-      <mat-card-title>答题卡</mat-card-title>
-      <mat-card-subtitle> {{ msg }}</mat-card-subtitle>
-      <mat-card-content>
-        <div>
-          选择题
-          <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
-            <mat-grid-tile
-              class="grid-tile"
-              *ngFor="let card of multipleChoicesCard; index as i"
-              [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
-            >
-              {{ i + 1 }}
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
-        <div>
-          填空题
-          <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
-            <mat-grid-tile
-              class="grid-tile"
-              *ngFor="let card of gapFillingCard; index as i"
-              [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
-            >
-              {{ i + 1 }}
-            </mat-grid-tile>
-          </mat-grid-list>
-        </div>
 
-        <div>简答题</div>
-        <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
-          <mat-grid-tile
-            class="grid-tile"
-            *ngFor="let card of questionCard; index as i"
-            [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
-          >
-            {{ i + 1 }}
-          </mat-grid-tile>
-        </mat-grid-list>
-        <div class="tips">
-          <div class="done">已做</div>
-          <div class="doing">未做</div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions class="card-action">
-        <button mat-raised-button color="accent" (click)="submitAns()">
-          交卷
-        </button>
-      </mat-card-actions>
-    </mat-card>
+  <mat-divider class="divider"></mat-divider>
+
+  <div class="page-content">
+    <!--试卷答题区域-->
+    <div class="problem-content">
+      <h4 id="multiple-choice">单选题 &nbsp; (点击试题作答)</h4>
+      <!--单选题-->
+      <div class="problem-card">
+        <app-multiple-choice
+          *ngFor="let multipleChoice of multipleChoices; index as i"
+          [multipleChoice]="multipleChoice"
+          [index]="i"
+          (answered)="showMultipleAnswer($event)"
+        >
+        </app-multiple-choice>
+      </div>
+
+      <mat-divider class="divider"></mat-divider>
+      <!-- 填空题 -->
+      <h4>填空题 &nbsp; (点击试题作答)</h4>
+      <div class="problem-card">
+        <app-gap-filling
+          *ngFor="let blankProblem of blankProblems; index as i"
+          [blankProblem]="blankProblem"
+          [index]="i"
+          (blankAns)="showGapFillingAnswer($event)"
+        ></app-gap-filling>
+      </div>
+      <mat-divider></mat-divider>
+      <!-- 简答题 -->
+      <h4>简答题</h4>
+
+      <div class="problem-card">
+        <app-question-answer
+          *ngFor="let question of questionAndAnswers; index as i"
+          [question]="question"
+          [index]="i"
+          (questionAns)="showQuestionAnswer($event)"
+        ></app-question-answer>
+      </div>
+      <mat-divider class="divider"></mat-divider>
+      <!-- 代码题 -->
+      <h4>代码题</h4>
+      <div class="problem-card ">
+        请仔细阅读下列注意事项
+        <ul>
+          <li>请确保代码包含 <code>main()</code> 函数</li>
+          <li>请确保函数有最后返回值 <code>return 0;</code></li>
+          <li>除要求的输入输出以外，请勿有其他输入输出</li>
+          <li>代码完成后点击<b>提交代码</b>，否则不计入成绩</li>
+          <li>使用<code>C/C++</code>的同学语言选择 <code>C</code></li>
+        </ul>
+        <app-code-editor
+          class="code-editor"
+          [problem]="problem"
+          *ngFor="let problem of algorithmAnswer; index as i"
+          [index]="i"
+          (answered)="showCodeAnswer($event)"
+        ></app-code-editor>
+      </div>
+    </div>
+    <!--答题卡-->
+    <div class="student-ans-card">
+      <!--选择题-->
+      <mat-card>
+        <mat-card-title>答题卡</mat-card-title>
+        <mat-card-subtitle> {{ msg }}</mat-card-subtitle>
+        <mat-card-content>
+          <div>
+            选择题
+            <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+              <mat-grid-tile
+                class="grid-tile"
+                *ngFor="let card of multipleChoicesCard; index as i"
+                [style.background-color]="
+                  card.ans === '' ? '#d32f2f' : '#64dd17'
+                "
+              >
+                {{ i + 1 }}
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+          <div>
+            填空题
+            <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+              <mat-grid-tile
+                class="grid-tile"
+                *ngFor="let card of gapFillingCard; index as i"
+                [style.background-color]="
+                  card.ans === '' ? '#d32f2f' : '#64dd17'
+                "
+              >
+                {{ i + 1 }}
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+
+          <div>简答题</div>
+          <mat-grid-list cols="4" rowHeight="1:1" class="grid-list">
+            <mat-grid-tile
+              class="grid-tile"
+              *ngFor="let card of questionCard; index as i"
+              [style.background-color]="card.ans === '' ? '#d32f2f' : '#64dd17'"
+            >
+              {{ i + 1 }}
+            </mat-grid-tile>
+          </mat-grid-list>
+          <div class="tips">
+            <div class="done">已做</div>
+            <div class="doing">未做</div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="card-action">
+          <button mat-raised-button color="accent" (click)="submitAns()">
+            交卷
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
 </div>
