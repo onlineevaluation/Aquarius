@@ -17,7 +17,6 @@ export class SubmitDialogComponent implements OnInit {
 
   ngOnInit() {
     this.time = this.data.time;
-    console.log('this time', this.time);
   }
 
   onSubmit() {
@@ -26,7 +25,7 @@ export class SubmitDialogComponent implements OnInit {
     const gapFillAns = this.data.gapFillCard;
     const questionAns = this.data.questionCard;
     const algorithmAns = this.data.algorithmCard;
-    console.log('al ans dialog', algorithmAns);
+
     this.pageService
       .submitPage(pageId, choiceAns, gapFillAns, questionAns, algorithmAns)
       .subscribe(

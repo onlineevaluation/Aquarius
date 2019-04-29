@@ -5,7 +5,11 @@
 .header-card {
     display: flex;
     .info {
+        flex:8;
         margin-left: 20px;
+    }
+    .setting {
+        flex: 1;
     }
 }
 
@@ -19,5 +23,20 @@
     .right-card {
         flex: 1;
         margin-left: 10px;
+    }
+}
+
+
+.recommended-card{
+    display: flex;
+    justify-content: start;
+    flex-wrap:wrap;
+    .example-card{
+        margin: 10px;
+        max-width: 200px;
+    }
+    .andsoon-card{
+        margin: 10px;
+    
     }
 }

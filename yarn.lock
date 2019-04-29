@@ -189,6 +189,12 @@
   version "7.2.9"
   resolved "http://registry.npm.taobao.org/@angular/language-service/download/@angular/language-service-7.2.9.tgz#50a74f80a42b069c6a3a0844ee6af3098f8bd48b"
 
+"@angular/material@^7.2.0":
+  version "7.3.7"
+  resolved "https://registry.npm.taobao.org/@angular/material/download/@angular/material-7.3.7.tgz#dcd95e6618ba6254c5880efee1aad349cf5b9140"
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/platform-browser-dynamic@~7.2.9":
   version "7.2.9"
   resolved "http://registry.npm.taobao.org/@angular/platform-browser-dynamic/download/@angular/platform-browser-dynamic-7.2.9.tgz#bfbdf1a906f1363440cd4f18f9dd64a369a7b55a"

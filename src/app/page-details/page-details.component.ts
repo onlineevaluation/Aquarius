@@ -30,8 +30,9 @@ export class PageDetailsComponent implements OnInit {
     });
     // 获取用户信息
     this.pageDetailsService.getUserProfile().subscribe(result => {
+      console.log('data is ', result);
       this.username = result.data.name;
-      this.studentNumber = result.data.studentNumber;
+      this.studentNumber = result.data.number;
     });
   }
 }

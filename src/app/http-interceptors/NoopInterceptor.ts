@@ -10,6 +10,7 @@ import {
 import { Observable } from 'rxjs';
 import { map, mergeMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 /**
  * @author 杨晓辉
@@ -17,9 +18,9 @@ import { Router } from '@angular/router';
  */
 @Injectable()
 export class NoopInterceptor implements HttpInterceptor {
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = 'http://106.12.195.114:8081';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -56,6 +57,9 @@ export class NoopInterceptor implements HttpInterceptor {
               break;
           }
           console.log('拦截器的error', error);
+          this.snackBar.open(`${error.error.message}`, '关闭', {
+            duration: 2000,
+          });
         },
       ),
     );

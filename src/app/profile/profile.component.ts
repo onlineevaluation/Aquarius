@@ -9,9 +9,13 @@ export class ProfileComponent implements OnInit {
   public profile: Profile;
   public firstName: string;
   constructor() {}
-
+  items = [];
   ngOnInit() {
     this.profile = JSON.parse(localStorage.getItem('profile'));
     this.firstName = this.profile.name.substring(0, 1);
+
+    for (let index = 0; index < 2; index++) {
+      this.items.push(index);
+    }
   }
 }

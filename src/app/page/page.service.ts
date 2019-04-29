@@ -6,10 +6,11 @@ import { Observable } from 'rxjs';
 import { StudentAns } from '../domain/StudentAns';
 import { StudentResult, Ans } from '../domain/StudentResult';
 import { authInfo } from '../utils/auth.util';
+import { Profile } from '../domain/Profile';
 
 @Injectable()
 export class PageService {
-
+  private studentId: number;
   constructor(private http: HttpClient) {}
   /**
    * 获得试卷
@@ -47,7 +48,10 @@ export class PageService {
   ): Observable<Result> {
     const studentResult = new StudentResult();
     studentResult.pageId = pageId;
-    studentResult.studentId = authInfo().userId;
+    var profileJson = localStorage.getItem('profile');
+    const profile: Profile = JSON.parse(profileJson);
+    this.studentId = profile.identity;
+    studentResult.studentId = this.studentId;
     choiceAns
       .filter(item => item.problemId !== undefined)
       .forEach(item => {
@@ -73,13 +77,16 @@ export class PageService {
         studentResult.answer.push(ans);
       });
     algornreAns
-      .filter(item => item.titleNumber !== undefined)
+      .filter(item => item.problemId !== undefined)
       .forEach(item => {
+        console.log('item', item);
         const ans = new Ans();
-        ans.id = item.titleNumber;
+        ans.id = item.problemId;
         ans.ans = item.ans;
         studentResult.answer.push(ans);
       });
+    console.log('student result ', JSON.stringify(studentResult));
+
     return this.http.post<Result>(
       '/page/addAns',
       JSON.stringify(studentResult),

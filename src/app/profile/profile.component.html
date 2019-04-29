@@ -5,6 +5,9 @@
       {{ profile.name }}
       <p>{{ profile.studentNumber }}</p>
     </div>
+    <div class="setting">
+      <button mat-button>设置</button>
+    </div>
   </mat-card>
 
   <div class="body-card">
@@ -14,6 +17,39 @@
 
     <mat-card class="right-card">
       <mat-card-title>课程推荐</mat-card-title>
+      <mat-card-content class="recommended-card ">
+        <mat-card class="example-card" *ngFor="let item of items">
+          <mat-card-header>
+            <mat-card-title>
+              使用ViewPager实现卡片式问答项目（上）
+            </mat-card-title>
+          </mat-card-header>
+          <img
+            mat-card-image
+            src="https://img4.mukewang.com/5cb831fd0949d9f306000338-240-135.jpg"
+            alt="Photo of a Shiba Inu"
+          />
+          <mat-card-content>
+            <p>
+              简介：本门课程将带大家从零开始开发一个在线答题app。本课程分为“上”和“下”两个部分，在“上”中，我们将从需求分析开始，使用mvp构建模式搭建框架，完成项目的布局，网络数据请求，答题控件开发和逻辑实现。
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="andsoon-card">
+          <mat-card-header>
+            <mat-card-title>更多</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              ......
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </mat-card-content>
     </mat-card>
   </div>
 </div>

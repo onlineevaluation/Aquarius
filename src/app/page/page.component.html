@@ -2,15 +2,17 @@
   <!--试卷标题-->
   <mat-toolbar>
     <mat-toolbar-row class="title-row">
-      <span class="fill-remaining-space "></span> <span>数据结构链表测试</span>
+      <span class="fill-remaining-space "></span>
+      <span>{{ studentPageInfo.paperTitle }} </span>
       <span class="fill-remaining-space "></span>
     </mat-toolbar-row>
 
     <mat-toolbar-row class="data-row">
       <span class="fill-remaining-space "></span>
       <small>
-        姓名:张三 &nbsp; 出卷人:李四 &nbsp;
-        考试时间:1月7日09点18分-1月7日11点18分
+        姓名: {{ studentName }} &nbsp; 出卷人:
+        {{ studentPageInfo.teacherName }}&nbsp;
+        <!-- 考试时间:{{1月7日09点18分}}-1月7日11点18分 -->
       </small>
       <span class="fill-remaining-space "></span>
     </mat-toolbar-row>

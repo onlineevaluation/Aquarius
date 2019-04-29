@@ -1,3 +1,5 @@
+import { Profile } from 'src/app/domain/Profile';
+import { Result } from './../../domain/Result';
 import { Component, Input, OnInit } from '@angular/core';
 import { Exam } from '../../domain/Exam';
 import { MatSnackBar } from '@angular/material';
@@ -15,6 +17,7 @@ export class ExamItemComponent implements OnInit {
   private num: number;
   private message: string;
   public state: string;
+  private studentId: number;
   constructor(
     public snackBar: MatSnackBar,
     private router: Router,
@@ -22,6 +25,9 @@ export class ExamItemComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    var profileJson = localStorage.getItem('profile');
+    const profile: Profile = JSON.parse(profileJson);
+    this.studentId = profile.identity;
     const startTime = Date.parse(this.item.startTime);
     const endTime = Date.parse(this.item.endTime);
     const currentTime = Date.parse(Date());
@@ -36,25 +42,33 @@ export class ExamItemComponent implements OnInit {
     }
   }
 
-  startExam() {
-    const studentId = authInfo().userId;
+  startExam(pageId: number) {
     // 校验试卷是否已经考试
-    this.examService.verifyPage(studentId, this.item.classId).subscribe();
-    //  弹出吐司
-    this.num = Math.random() * 10;
-    if (this.num <= 4) {
-      this.message = '我劝天公重抖擞，不拘一格降人才。';
-    } else if (this.num <= 7 && this.num > 4) {
-      this.message = '及时当勉励，岁月不待人。';
-    } else {
-      this.message = '成风破浪会有时，直挂云帆济沧海。';
-    }
+    this.examService.verifyPage(this.studentId, pageId).subscribe(
+      (result: Result) => {
+        console.log('result', result);
+        //  弹出吐司
+        this.num = Math.random() * 10;
+        if (this.num <= 4) {
+          this.message = '我劝天公重抖擞，不拘一格降人才。';
+        } else if (this.num <= 7 && this.num > 4) {
+          this.message = '及时当勉励，岁月不待人。';
+        } else {
+          this.message = '成风破浪会有时，直挂云帆济沧海。';
+        }
 
-    // 计算吐司内容
-    this.snackBar.open(this.message, '关闭', {
-      duration: 2000,
-    });
-    // 路由转跳
-    this.router.navigate(['/page', this.item.pagesId, this.item.classId]);
+        // 计算吐司内容
+        this.snackBar.open(this.message, '关闭', {
+          duration: 2000,
+        });
+
+        // 路由转跳
+        this.router.navigate(['/page', pageId, this.item.classId]);
+      },
+      (error: Error) => {
+        this.router.navigateByUrl('/');
+        return;
+      },
+    );
   }
 }

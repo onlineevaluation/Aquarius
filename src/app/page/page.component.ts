@@ -8,6 +8,8 @@ import { PageService } from './page.service';
 import { MultipleChoiceService } from './page/multiple-choice/multiple-choice.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
+import { Profile } from '../domain/Profile';
+import { StudentPageInfo } from '../domain/StudentPageInfo';
 
 @Component({
   selector: 'app-page',
@@ -50,9 +52,7 @@ export class PageComponent implements OnInit {
    * todo()
    */
   public algorithmCard: Array<StudentAns> = [];
-  public CodeProblems: Array<CodeProblem> = [
-    new CodeProblem(1, '用c语言实现一个双向链表…………', '512kb', '5000ms'),
-  ];
+  public CodeProblems: Array<CodeProblem> = [];
   public msg: string = '时分秒';
   /**
    * 倒计时时间
@@ -62,7 +62,7 @@ export class PageComponent implements OnInit {
   public answers: Array<Answer> = [];
   private pagesId: number;
   private classId: number;
-
+  public studentPageInfo: StudentPageInfo = new StudentPageInfo();
   constructor(
     private activateRouter: ActivatedRoute,
     private router: Router,
@@ -71,54 +71,66 @@ export class PageComponent implements OnInit {
     public multipleService: MultipleChoiceService,
     private snackBar: MatSnackBar,
   ) {}
-
+  studentName: string;
   ngOnInit() {
+    var profileJson = localStorage.getItem('profile');
+    const profile: Profile = JSON.parse(profileJson);
+    this.studentName = profile.name;
     this.activateRouter.params.subscribe((params: Params) => {
       this.pagesId = params['pageId'];
       this.classId = params['classId'];
     });
 
-    this.pageService.getProblem(this.classId, this.pagesId).subscribe(next => {
-      this.multipleChoices = next.data.signChoice;
-      this.blankProblems = next.data.blank;
-      this.questionAndAnswers = next.data.ansQuestion;
-      this.algorithmAnswer = next.data.algorithm;
-      this.multipleChoicesCard.length = this.multipleChoices.length;
-      this.gapFillingCard.length = this.blankProblems.length;
-      this.questionCard.length = this.questionAndAnswers.length;
-      this.algorithmCard.length = this.algorithmAnswer.length;
-      console.log('算法试题', this.algorithmAnswer);
-      for (let i = 0; i < this.multipleChoicesCard.length; i++) {
-        const studentAns = new StudentAns();
-        // 题号是从1题开始的
-        studentAns.titleNumber = i + 1;
-        studentAns.ans = '';
-        this.multipleChoicesCard[i] = studentAns;
-      }
-      for (let i = 0; i < this.gapFillingCard.length; i++) {
-        const studentAns = new StudentAns();
-        // 题号是从1题开始的
-        studentAns.titleNumber = i + 1;
-        studentAns.ans = '';
-        this.gapFillingCard[i] = studentAns;
-      }
+    this.pageService.getProblem(this.classId, this.pagesId).subscribe(
+      next => {
+        // this.studentPageInfo = new StudentPageInfo();
+        this.studentPageInfo = next.data.studentPageInfo;
+        console.log('studen page ', this.studentPageInfo.paperTitle);
+        this.multipleChoices = next.data.signChoice;
+        this.blankProblems = next.data.blank;
+        this.questionAndAnswers = next.data.ansQuestion;
+        this.algorithmAnswer = next.data.algorithm;
+        this.multipleChoicesCard.length = this.multipleChoices.length;
+        this.gapFillingCard.length = this.blankProblems.length;
+        this.questionCard.length = this.questionAndAnswers.length;
+        this.algorithmCard.length = this.algorithmAnswer.length;
+        console.log('算法试题', this.algorithmAnswer);
+        for (let i = 0; i < this.multipleChoicesCard.length; i++) {
+          const studentAns = new StudentAns();
+          // 题号是从1题开始的
+          studentAns.titleNumber = i + 1;
+          studentAns.ans = '';
+          this.multipleChoicesCard[i] = studentAns;
+        }
+        for (let i = 0; i < this.gapFillingCard.length; i++) {
+          const studentAns = new StudentAns();
+          // 题号是从1题开始的
+          studentAns.titleNumber = i + 1;
+          studentAns.ans = '';
+          this.gapFillingCard[i] = studentAns;
+        }
 
-      for (let i = 0; i < this.questionAndAnswers.length; i++) {
-        const studentAns = new StudentAns();
-        // 题号是从1题开始的
-        studentAns.titleNumber = i + 1;
-        studentAns.ans = '';
-        this.questionCard[i] = studentAns;
-      }
+        for (let i = 0; i < this.questionAndAnswers.length; i++) {
+          const studentAns = new StudentAns();
+          // 题号是从1题开始的
+          studentAns.titleNumber = i + 1;
+          studentAns.ans = '';
+          this.questionCard[i] = studentAns;
+        }
 
-      for (let i = 0; i < this.CodeProblems.length; i++) {
-        const studentAns = new StudentAns();
-        // 题号是从1题开始的
-        studentAns.titleNumber = i + 1;
-        studentAns.ans = '';
-        this.algorithmCard[i] = studentAns;
-      }
-    });
+        for (let i = 0; i < this.algorithmCard.length; i++) {
+          const studentAns = new StudentAns();
+          // 题号是从1题开始的
+          studentAns.titleNumber = i + 1;
+          studentAns.ans = '';
+          this.algorithmCard[i] = studentAns;
+        }
+      },
+
+      (error: Error) => {
+        this.router.navigateByUrl('/');
+      },
+    );
 
     this.resetTime(this.time);
   }
@@ -138,9 +150,10 @@ export class PageComponent implements OnInit {
 
   /**
    *
-   * @param answer 获取代码题答案
+   * @param answer 获取代码题答案 这个是算法题
    */
   showCodeAnswer(ans: StudentAns) {
+    console.log('al', ans);
     for (let i = 0; i < this.algorithmCard.length; i++) {
       if (this.algorithmCard[i].titleNumber === 1) {
         this.algorithmCard.splice(i, 1, ans);
@@ -156,6 +169,7 @@ export class PageComponent implements OnInit {
       }
       break;
     }
+    console.log('al', this.algorithmCard);
   }
 
   /**
@@ -219,6 +233,10 @@ export class PageComponent implements OnInit {
         algorithmCard: this.algorithmCard,
       },
     });
+    console.log('c', this.multipleChoices);
+    console.log('g', this.gapFillingCard);
+    console.log('q', this.questionCard);
+    console.log('a', this.algorithmCard);
     ref.afterClosed().subscribe(
       next => {
         switch (next.msg) {

@@ -3,4 +3,5 @@ export class Profile {
   name: string;
   studentNumber: string;
   userId: number;
+  identity: number;
 }

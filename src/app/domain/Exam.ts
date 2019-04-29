@@ -5,7 +5,8 @@ export interface Exam {
   commnet: string;
   endTime: string;
   invigilator: string;
-  pagesId: number;
+  pageId: number;
   startTime: string;
-  title: string;
+  pageTitle: string;
+  course: string;
 }

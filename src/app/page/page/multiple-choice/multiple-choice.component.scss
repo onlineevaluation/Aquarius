@@ -1,5 +1,6 @@
 .card {
     margin-top: 20px;
+    word-wrap: break-word;
     .radio-group {
         display: flex;
         flex-direction: column;
@@ -9,4 +10,9 @@
 
 .card:hover {
     box-shadow: 0 10px 5px #888888;
+}
+
+.problem-content {
+    width: 100%;
+    word-wrap: break-word;
 }

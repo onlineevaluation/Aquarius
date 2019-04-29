@@ -66,7 +66,7 @@ export class CodeEditorComponent implements OnInit {
    */
   submitCode() {
     const ans = new StudentAns();
-    ans.titleNumber = this.problem.id;
+    ans.problemId = this.problem.id;
     ans.ans = this.code;
     this.answered.emit(ans);
   }
