@@ -9,7 +9,7 @@
     <mat-grid-tile>试卷名称</mat-grid-tile>
     <mat-grid-tile> {{ details.pageTitle }} </mat-grid-tile>
     <mat-grid-tile>完成时间</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
+    <mat-grid-tile>--</mat-grid-tile>
     <mat-grid-tile>分数</mat-grid-tile>
     <mat-grid-tile> {{ details.score }} </mat-grid-tile>
   </mat-grid-list>
@@ -34,6 +34,6 @@
   <app-code-details-item *ngFor="let item of details.algorithm" [item]="item">
   </app-code-details-item>
 </div>
-<div class="fab-download">
-  <button mat-fab color="accent" class="download">下载</button>
-</div>
+<!--<div class="fab-download">-->
+<!--  <button mat-fab color="accent" class="download">下载</button>-->
+<!--</div>-->

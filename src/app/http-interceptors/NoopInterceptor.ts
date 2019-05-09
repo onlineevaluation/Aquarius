@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
   HttpInterceptor,
   HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpErrorResponse,
-  HttpResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, mergeMap, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 /**
  * @author 杨晓辉
@@ -18,7 +17,8 @@ import { MatSnackBar } from '@angular/material';
  */
 @Injectable()
 export class NoopInterceptor implements HttpInterceptor {
-  private baseUrl = 'http://106.12.195.114:8081';
+  // private baseUrl = 'http://106.12.195.114:8081';
+  private baseUrl = 'http://localhost:8081';
 
   constructor(private router: Router, private snackBar: MatSnackBar) {}
 
