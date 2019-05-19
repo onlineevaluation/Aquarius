@@ -1,16 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Injectable, ErrorHandler } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, Injectable, ErrorHandler} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {CoreModule} from './core/core.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { JwtModule } from '@auth0/angular-jwt';
-import { CanLoginGuard } from './provide/CanLoginProvide';
+import {JwtModule} from '@auth0/angular-jwt';
+import {CanLoginGuard} from './provide/CanLoginProvide';
 
 import * as Sentry from '@sentry/browser';
-import { authInfo } from './utils/auth.util';
+import {authInfo} from './utils/auth.util';
 import {
   MatGridListModule,
   MatCardModule,
@@ -18,7 +18,7 @@ import {
   MatIconModule,
   MatButtonModule,
 } from '@angular/material';
-import { LayoutModule } from '@angular/cdk/layout';
+import {LayoutModule} from '@angular/cdk/layout';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -30,12 +30,13 @@ Sentry.init({
 });
 
 Sentry.configureScope(scope => {
-  scope.setUser({ id: `${authInfo().userId}` });
+  scope.setUser({id: `${authInfo().userId}`});
 });
 
 @Injectable()
 export class SentryErrorHandler implements ErrorHandler {
-  constructor() {}
+  constructor() {
+  }
 
   handleError(error) {
     Sentry.captureException(error.originalError || error);
@@ -53,7 +54,7 @@ export class SentryErrorHandler implements ErrorHandler {
         blacklistedRoutes: [],
       },
     }),
-    BrowserModule,
+    BrowserModule.withServerTransition({appId: 'aquarius'}),
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
@@ -66,8 +67,9 @@ export class SentryErrorHandler implements ErrorHandler {
   ],
   providers: [
     CanLoginGuard,
-    { provide: ErrorHandler, useClass: SentryErrorHandler },
+    {provide: ErrorHandler, useClass: SentryErrorHandler},
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
