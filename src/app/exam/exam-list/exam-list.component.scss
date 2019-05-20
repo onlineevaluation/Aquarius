@@ -3,8 +3,11 @@
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  padding: 30px;
 }
-
+.app-exam-item{
+  flex: 1
+}
 .card {
   height: auto;
   flex: 0 0 310px;

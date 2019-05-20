@@ -63,7 +63,12 @@ export class ExamItemComponent implements OnInit {
         });
 
         // 路由转跳
-        this.router.navigate(['/page', pageId, this.item.classId]);
+        this.router.navigate([
+          '/page',
+          pageId,
+          this.item.classId,
+          this.item.id,
+        ]);
       },
       (error: Error) => {
         this.router.navigateByUrl('/');

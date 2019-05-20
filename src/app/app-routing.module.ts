@@ -10,7 +10,7 @@ const routes: Routes = [
     canLoad: [CanLoginGuard],
   },
   {
-    path: 'page/:pageId/:classId',
+    path: 'page/:pageId/:classId/:pageAndClassId',
     loadChildren: './page/page.module#PageModule',
     canLoad: [CanLoginGuard],
   },

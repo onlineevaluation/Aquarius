@@ -56,13 +56,16 @@ export class PageComponent implements OnInit {
   public msg: string = '时分秒';
   /**
    * 倒计时时间
+   * 1000 * 60 * 60 * 2
    */
-  private time = 3600000;
+  private time = 7200000;
+  private doTime = 0;
 
   public answers: Array<Answer> = [];
   private pagesId: number;
   private classId: number;
   public studentPageInfo: StudentPageInfo = new StudentPageInfo();
+  private pageAndClassId: number;
   constructor(
     private activateRouter: ActivatedRoute,
     private router: Router,
@@ -79,13 +82,13 @@ export class PageComponent implements OnInit {
     this.activateRouter.params.subscribe((params: Params) => {
       this.pagesId = params['pageId'];
       this.classId = params['classId'];
+      this.pageAndClassId = params['pageAndClassId'];
     });
 
-    this.pageService.getProblem(this.classId, this.pagesId).subscribe(
+    this.pageService.getProblem(this.pageAndClassId).subscribe(
       next => {
         // this.studentPageInfo = new StudentPageInfo();
         this.studentPageInfo = next.data.studentPageInfo;
-        console.log('studen page ', this.studentPageInfo.paperTitle);
         this.multipleChoices = next.data.signChoice;
         this.blankProblems = next.data.blank;
         this.questionAndAnswers = next.data.ansQuestion;
@@ -94,6 +97,7 @@ export class PageComponent implements OnInit {
         this.gapFillingCard.length = this.blankProblems.length;
         this.questionCard.length = this.questionAndAnswers.length;
         this.algorithmCard.length = this.algorithmAnswer.length;
+        this.time = this.studentPageInfo.needTime;
         console.log('算法试题', this.algorithmAnswer);
         for (let i = 0; i < this.multipleChoicesCard.length; i++) {
           const studentAns = new StudentAns();
@@ -130,9 +134,10 @@ export class PageComponent implements OnInit {
       (error: Error) => {
         this.router.navigateByUrl('/');
       },
+      () => {
+        this.resetTime(this.time);
+      },
     );
-
-    this.resetTime(this.time);
   }
 
   /**
@@ -207,11 +212,14 @@ export class PageComponent implements OnInit {
     function countdown() {
       var s = time % 60;
       var m = Math.floor(time / 60) % 60;
-      that.msg = `${(m < 10 ? '0' : '') + m}:${(s < 10 ? '0' : '') + s}`;
+      var h = Math.floor(time / 3600000);
+      that.msg = `${h}:${(m < 10 ? '0' : '') + m}:${(s < 10 ? '0' : '') + s}`;
       if (--time > 0) {
+        that.doTime++;
         setTimeout(countdown, 1000);
       } else {
         // 交卷
+        // this._time;
         that.submitAns();
       }
     }
@@ -231,12 +239,9 @@ export class PageComponent implements OnInit {
         gapFillCard: this.gapFillingCard,
         questionCard: this.questionCard,
         algorithmCard: this.algorithmCard,
+        doTime: this.doTime,
       },
     });
-    console.log('c', this.multipleChoices);
-    console.log('g', this.gapFillingCard);
-    console.log('q', this.questionCard);
-    console.log('a', this.algorithmCard);
     ref.afterClosed().subscribe(
       next => {
         switch (next.msg) {

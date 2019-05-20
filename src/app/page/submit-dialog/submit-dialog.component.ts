@@ -25,9 +25,19 @@ export class SubmitDialogComponent implements OnInit {
     const gapFillAns = this.data.gapFillCard;
     const questionAns = this.data.questionCard;
     const algorithmAns = this.data.algorithmCard;
+    const doTime = this.data.doTime;
+
+    console.log('do time ', doTime);
 
     this.pageService
-      .submitPage(pageId, choiceAns, gapFillAns, questionAns, algorithmAns)
+      .submitPage(
+        pageId,
+        choiceAns,
+        gapFillAns,
+        questionAns,
+        algorithmAns,
+        doTime,
+      )
       .subscribe(
         next => {
           this.dialogRef.close({ msg: 'success' });

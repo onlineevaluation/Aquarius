@@ -40,10 +40,6 @@ export class ExamService {
   }
 
   verifyPage(studentId: number, pageId: number): Observable<Result> {
-    const bodyParams = {
-      studentId: studentId,
-      pageId: pageId,
-    };
     const params = new VerifyPageParam();
     params.pageId = pageId;
     params.studentId = studentId;

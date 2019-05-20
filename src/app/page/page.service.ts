@@ -17,12 +17,8 @@ export class PageService {
    * @param classId 班级id
    * @param pageId 试卷id
    */
-  getProblem(classId: number, pageId: number): Observable<Result> {
-    const params = new HttpParams()
-      .set('classId', `${classId}`)
-      .set('pageId', `${pageId}`);
-
-    return this.http.get<Result>(`/page/exam`, { params }).pipe(
+  getProblem(pageAndClassId: number): Observable<Result> {
+    return this.http.get<Result>(`/page/exam/${pageAndClassId}`).pipe(
       map((result: Result) => {
         console.log('page is ', result);
         return result;
@@ -45,6 +41,7 @@ export class PageService {
     blankAns: Array<StudentAns>,
     questionAns: Array<StudentAns>,
     algornreAns: Array<StudentAns>,
+    doTime: number,
   ): Observable<Result> {
     const studentResult = new StudentResult();
     studentResult.pageId = pageId;
@@ -52,6 +49,7 @@ export class PageService {
     const profile: Profile = JSON.parse(profileJson);
     this.studentId = profile.identity;
     studentResult.studentId = this.studentId;
+    studentResult.doTime = doTime;
     choiceAns
       .filter(item => item.problemId !== undefined)
       .forEach(item => {

@@ -1,12 +1,16 @@
-.title {
-  padding: 20px;
+.container {
+    padding: 20px;
 }
 .card {
     width: 500px;
+    height: 50px;
 }
 
 .item-list {
     margin-top: 60px;
+}
+.card:hover {
+    box-shadow: 0 10px 5px #888888;
 }
 
 .content {
